@@ -406,6 +406,7 @@ DEPENDENCIES
   factory_girl_rails
   fuubar
   grape
+  grape-entity
   grape-swagger-rails
   guard-bundler
   guard-rails

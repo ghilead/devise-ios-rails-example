@@ -7,6 +7,7 @@ gem 'devise', github: 'plataformatec/devise', branch: 'lm-rails-4-2'
 gem 'dotenv-deployment'
 gem 'dotenv-rails'
 gem 'grape'
+gem 'grape-entity'
 gem 'grape-swagger-rails'
 gem 'netguru', github: 'netguru/netguru', require: false
 gem 'rollbar'
