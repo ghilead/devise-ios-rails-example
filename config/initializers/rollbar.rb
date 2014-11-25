@@ -6,7 +6,6 @@ Rollbar.configure do |config|
      'ActionController::RoutingError' => 'ignore'
    )
 
-
   if Rails.env.test? || Rails.env.development?
     config.enabled = false
   end

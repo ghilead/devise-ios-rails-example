@@ -1,13 +1,6 @@
 require 'headless'
 require 'capybara/rspec'
 
-begin
-  headless = Headless.new
-  headless.start
-rescue Headless::Exception => e
-  puts "\n\tWarning: #{e.message}\n\n"
-end
-
 if ENV['CI']
   require "codeclimate-test-reporter"
   CodeClimate::TestReporter.start
