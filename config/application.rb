@@ -1,7 +1,6 @@
 require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
-require 'grape-active_model_serializers'
 
 Bundler.require(*Rails.groups)
 
