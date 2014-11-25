@@ -1,4 +1,3 @@
-require 'headless'
 require 'capybara/rspec'
 
 if ENV['CI']
