@@ -17,6 +17,7 @@ gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem 'haml-rails'
 gem 'sass-rails', '>= 5.0.0.beta1' # because of rails 4.2.0.beta4
+gem 'coffee-rails'
 
 group :development do
   gem 'better_errors'
