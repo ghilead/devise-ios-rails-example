@@ -45,7 +45,10 @@ Environment variables
 - You will need to generate your own `SECRET_KEY_BASE` by running `spring rake secret` and pasting the output into .env file.
 - You can omit Rollbar config in development environment.
 
+Copyright  2014 © [Netguru][netguru_url], released under the New BSD License
+
 [ios_saaskit]: https://github.com/netguru/saaskit
 [mac_guidelines]: https://gorails.com/setup/osx/10.10-yosemite
 [ubuntu_guidelines]: https://gorails.com/setup/ubuntu/14.10
 [postgres_guidelines]: https://wiki.postgresql.org/wiki/Detailed_installation_guides
+[netguru_url]: https://netguru.co
