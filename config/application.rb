@@ -18,7 +18,6 @@ module Saaskit
       g.fixture_replacement :factory_girl, dir: "spec/factories"
     end
     config.paths.add File.join('app', 'api'), glob: File.join('**', '*.rb')
-    config.paths.add File.join('app', 'workers'), glob: File.join('**', '*.rb')
     config.autoload_paths << Rails.root.join('lib')
     config.autoload_paths += %W("#{config.root}/app/validators/")
   end
