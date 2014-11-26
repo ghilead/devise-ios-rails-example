@@ -7,4 +7,5 @@ class API < Grape::API
 
   format :json
   mount V1::Base
+  add_swagger_documentation(api_version: 'v1')
 end
