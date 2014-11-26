@@ -4,4 +4,6 @@ class API < Grape::API
   def self.logger
     @logger ||= Rails.logger
   end
+
+  format :json
 end
