@@ -6,4 +6,5 @@ class API < Grape::API
   end
 
   format :json
+  mount V1::Base
 end
