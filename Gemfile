@@ -10,6 +10,7 @@ gem 'dotenv-rails'
 gem 'grape'
 gem 'grape-entity'
 gem 'grape-swagger-rails'
+gem 'grape-active_model_serializers'
 gem 'netguru', github: 'netguru/netguru', require: false
 gem 'rollbar'
 gem 'rack-cors'
