@@ -1,13 +1,3 @@
-shared_examples 'a bad request' do |response_code|
-  it "returns a bad request (#{response_code}) status code" do
-    expect(subject.status).to eq(response_code)
-  end
-
-  it "is a JSON response" do
-    expect(subject.content_type).to eq 'application/json'
-  end
-end
-
 shared_examples "a good request" do |response_code|
   it "returns an OK (#{response_code}) status code" do
     expect(subject.status).to eq(response_code)
@@ -31,7 +21,21 @@ shared_examples "a successful JSON POST request" do
 end
 
 shared_examples "a successful JSON DELETE request" do
-  it_behaves_like 'a good request', 201
+  it_behaves_like 'a good request', 200
+end
+
+shared_examples 'a bad request' do |response_code|
+  it "returns a bad request (#{response_code}) status code" do
+    expect(subject.status).to eq(response_code)
+  end
+
+  it "is a JSON response" do
+    expect(subject.content_type).to eq 'application/json'
+  end
+
+  it "returns an error object" do
+    expect(json_for(subject)).to have_key('error')
+  end
 end
 
 shared_examples "an unsuccessful JSON request" do
