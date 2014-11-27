@@ -9,6 +9,10 @@ module V1
         error_response(message: e.message, status: 404)
       end
 
+      rescue_from Grape::Exceptions::ValidationErrors do |e|
+        error_response(message: e.message, status: e.status)
+      end
+
       rescue_from :all do |e|
         if Rails.env.development?
           raise e
