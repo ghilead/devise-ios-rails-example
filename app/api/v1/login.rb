@@ -1,10 +1,10 @@
 module V1
   class Login < Grape::API
+    desc 'User login'
     params do
-      requires :username, type: String, desc: 'user email'
+      requires :username, type: String, desc: 'user username'
       requires :password, type: String, desc: 'user password'
     end
-    desc 'User login'
     get '/login' do
     end
   end
