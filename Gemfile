@@ -5,6 +5,7 @@ gem 'arel', '6.0.0.beta2' # because of active record 4.2.0.betaX
 gem 'pg'
 
 gem 'devise', github: 'plataformatec/devise', branch: 'lm-rails-4-2'
+gem 'simple_token_authentication'
 gem 'dotenv-deployment'
 gem 'dotenv-rails'
 gem 'grape'
