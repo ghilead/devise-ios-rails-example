@@ -6,6 +6,8 @@ module V1
 
     include V1::ErrorHandler
 
+    helpers V1::Helpers::Params
+
     mount V1::Login
 
     add_swagger_documentation(api_version: 'v1')
