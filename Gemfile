@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '4.2.0.beta4'
+gem 'arel', '6.0.0.beta2' # because of active record 4.2.0.betaX
 gem 'pg'
 
 gem 'devise', github: 'plataformatec/devise', branch: 'lm-rails-4-2'
@@ -16,7 +17,7 @@ gem 'nokogiri'
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem 'haml-rails'
-gem 'sass-rails', '>= 5.0.0.beta1' # because of rails 4.2.0.beta4
+gem 'sass-rails', '>= 5.0.0.beta1' # because of rails 4.2.0.betaX
 gem 'coffee-rails'
 
 group :development do
