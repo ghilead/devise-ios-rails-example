@@ -1,32 +1,71 @@
 module V1
   describe Login do
     include Rack::Test::Methods
-    describe 'login a user' do
+    describe "login a user" do
       let(:url) { 'v1/login' }
+      let(:user) { create(:user) }
       subject { get url, params }
 
-      context 'with valid params' do
+      context "with valid params" do
         let(:params) do
           {
-            username: 'ios_man',
-            password: 'alcatraz',
+            username: user.username,
+            password: user.password,
           }
         end
 
-        it_behaves_like 'a successful JSON GET request'
+        it_behaves_like "a successful JSON GET request"
       end
 
-      context 'with invalid params' do
-        it_behaves_like 'an unsuccessful JSON request' do
+      context "with invalid params" do
+        it_behaves_like "an unsuccessful JSON request" do
           let(:params) { {} }
         end
 
-        it_behaves_like 'an unsuccessful JSON request' do
+        it_behaves_like "an unsuccessful JSON request" do
           let(:params) { { username: 'ios_man' } }
         end
 
-        it_behaves_like 'an unsuccessful JSON request' do
+        it_behaves_like "an unsuccessful JSON request" do
           let(:params) { { password: 'alcatraz' } }
+        end
+      end
+
+      context "with a valid user" do
+        let(:params) do
+          {
+            username: user.username,
+            password: user.password,
+          }
+        end
+
+        it "returns a user" do
+          json_response = json_for(subject)
+          expect(json_response).to have_key('user')
+        end
+
+        it "serializes user with user serializer" do
+          expect(subject.body).to eq UserSerializer.new(user).to_json
+        end
+      end
+
+      context "there is no such user in DB" do
+        let(:params) do
+          {
+            username: 'non_existent',
+            password: 'fictional',
+          }
+        end
+
+        it_behaves_like "an unauthorized JSON request"
+      end
+
+      context "password doesn't match the user" do
+        let(:params) do
+          {
+            username: user.username,
+            password: 'fictional',
+          }
         end
       end
     end

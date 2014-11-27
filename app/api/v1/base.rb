@@ -6,6 +6,7 @@ module V1
 
     include V1::ErrorHandler
 
+    helpers V1::Helpers::Authentication
     helpers V1::Helpers::Params
 
     mount V1::Login
