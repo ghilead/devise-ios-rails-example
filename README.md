@@ -1,7 +1,10 @@
 Open Source Saaskit Rails Backend
 =================================
 
-[![Circle CI](https://circleci.com/gh/netguru/saaskit-rails.svg?style=svg)](https://circleci.com/gh/netguru/saaskit-rails) [![Code Climate](https://codeclimate.com/repos/54734062e30ba07474053280/badges/398895b59d76c0c16cd2/gpa.svg)](https://codeclimate.com/repos/54734062e30ba07474053280/feed) [![Test Coverage](https://codeclimate.com/repos/54734062e30ba07474053280/badges/398895b59d76c0c16cd2/coverage.svg)](https://codeclimate.com/repos/54734062e30ba07474053280/feed)
+[![Circle CI](https://circleci.com/gh/netguru/saaskit-rails.svg?style=svg)](https://circleci.com/gh/netguru/saaskit-rails)
+[![Code Climate](https://codeclimate.com/repos/54734062e30ba07474053280/badges/398895b59d76c0c16cd2/gpa.svg)](https://codeclimate.com/repos/54734062e30ba07474053280/feed)
+[![Test Coverage](https://codeclimate.com/repos/54734062e30ba07474053280/badges/398895b59d76c0c16cd2/coverage.svg)](https://codeclimate.com/repos/54734062e30ba07474053280/feed)
+[![Dependency](https://img.shields.io/gemnasium/netguru/saaskit-rails.svg)](https://gemnasium.com/netguru/saaskit-rails)
 
 A rails backend for demonstrating how [Saaskit for iOS][ios_saaskit] works.
 
