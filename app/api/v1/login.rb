@@ -5,7 +5,7 @@ module V1
       requires :username, type: String, desc: 'user username'
       requires :password, type: String, desc: 'user password'
     end
-    get '/login', serializer: V1::UserSerializer do
+    post '/login', serializer: V1::UserSerializer do
       user = User.find_by_username(snake_declared_params[:username])
       if user.present? && user.valid_password?(snake_declared_params[:password])
         user

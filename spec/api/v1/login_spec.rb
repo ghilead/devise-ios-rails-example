@@ -4,7 +4,7 @@ module V1
     describe "login a user" do
       let(:url) { 'v1/login' }
       let(:user) { create(:user) }
-      subject { get url, params }
+      subject { post url, params }
 
       context "with valid params" do
         let(:params) do
@@ -14,7 +14,7 @@ module V1
           }
         end
 
-        it_behaves_like "a successful JSON GET request"
+        it_behaves_like "a successful JSON POST request"
       end
 
       context "with invalid params" do
