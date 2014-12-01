@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.0.beta4'
-gem 'arel', '6.0.0.beta2' # because of active record 4.2.0.betaX
+gem 'rails', '4.2.0.rc1'
 gem 'pg'
 
 gem 'devise', github: 'plataformatec/devise', branch: 'lm-rails-4-2'
