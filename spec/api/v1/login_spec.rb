@@ -19,16 +19,15 @@ module V1
         end
 
         context "with invalid params" do
-          it_behaves_like "an unsuccessful JSON request" do
-            let(:params) { {} }
-          end
-
-          it_behaves_like "an unsuccessful JSON request" do
-            let(:params) { { email: 'ios_man' } }
-          end
-
-          it_behaves_like "an unsuccessful JSON request" do
-            let(:params) { { password: 'alcatraz' } }
+          invalid_params = [
+            {},
+            { email: 'ios_man@example.com' },
+            { password: 'alcatraz' },
+          ]
+          invalid_params.each do |invalid_param|
+            it_behaves_like "an unsuccessful JSON request" do
+              let(:params) { invalid_param }
+            end
           end
         end
 
