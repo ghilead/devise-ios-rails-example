@@ -12,7 +12,7 @@ module V1
       if authenticated?
         user
       else
-        context.error!('unauthorized', 401)
+        context.error!(error, 401)
       end
     end
 
@@ -20,6 +20,14 @@ module V1
 
     def authenticated?
       user.present? && user.valid_password?(params[:password])
+    end
+
+    def error
+      Error.new(
+        message: 'unauthorized',
+        status: 401,
+        code: 0
+      )
     end
   end
 end

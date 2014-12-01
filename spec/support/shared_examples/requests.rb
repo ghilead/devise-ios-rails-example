@@ -43,7 +43,20 @@ shared_examples "an unsuccessful JSON request" do
 end
 
 shared_examples "an unauthorized JSON request" do
+  let(:error) do
+    {
+      message: 'unauthorized',
+      code: 0,
+      status: 401
+    }.stringify_keys
+  end
+
   it_behaves_like 'a bad request', 401
+
+  it 'returns error object' do
+    json_response = json_for(subject)
+    expect(json_response).to eq('error' => error)
+  end
 end
 
 shared_examples "a not found JSON request" do
