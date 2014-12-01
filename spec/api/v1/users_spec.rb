@@ -1,9 +1,11 @@
 module V1
   describe Users do
     include Rack::Test::Methods
+
     describe "login a user" do
       let(:url) { 'v1/users' }
       let(:user) { build(:user) }
+
       subject { post url, params }
 
       context "with valid params" do
