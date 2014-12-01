@@ -4,6 +4,8 @@ module V1
       :id,
       :email,
       :authentication_token,
+      :reset_password_token,
+      :reset_password_sent_at,
       :created_at,
       :updated_at
   end
