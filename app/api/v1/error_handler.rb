@@ -14,7 +14,7 @@ module V1
       end
 
       rescue_from :all do |e|
-        if Rails.env.development?
+        if Rails.env.development? || Rails.env.test?
           raise e
         else
           error_response(message: "Internal server error", status: 500)
