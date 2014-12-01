@@ -10,7 +10,7 @@ module V1
       context "with a valid user" do
         let(:params) do
           {
-            username: user.username,
+            email: user.email,
             password: user.password,
           }
         end
@@ -24,7 +24,7 @@ module V1
       context "there is no such user" do
         let(:params) do
           {
-            username: 'non_existent',
+            email: 'non_existent',
             password: 'fictional',
           }
         end
@@ -38,7 +38,7 @@ module V1
       context "password doesn't match the user" do
         let(:params) do
           {
-            username: user.username,
+            email: user.email,
             password: 'fictional',
           }
         end

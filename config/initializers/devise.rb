@@ -9,9 +9,9 @@ Devise.setup do |config|
 
   # ==> ORM configuration
   require 'devise/orm/active_record'
-  config.authentication_keys = [ :username ]
-  config.case_insensitive_keys = [ :username ]
-  config.strip_whitespace_keys = [ :username ]
+  config.authentication_keys = [ :email ]
+  config.case_insensitive_keys = [ :email ]
+  config.strip_whitespace_keys = [ :email ]
   config.params_authenticatable = true
   config.http_authenticatable = false
   config.http_authenticatable_on_xhr = true
@@ -34,7 +34,7 @@ Devise.setup do |config|
   config.expire_auth_token_on_timeout = false
 
   # ==> Configuration for :recoverable
-  config.reset_password_keys = [ :username ]
+  config.reset_password_keys = [ :email ]
   config.reset_password_within = 6.hours
 
   # ==> Scopes configuration

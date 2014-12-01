@@ -5,7 +5,7 @@ module V1
     def initialize(params, context)
       @params = params
       @context = context
-      @user = User.find_by_username(@params[:username])
+      @user = User.find_by_email(@params[:email])
     end
 
     def call

@@ -60,7 +60,7 @@ rake db:test:prepare
 this will create:
 
 * users:
-    - registered user - ios / alcatraz
+    - registered user - ios@example.com / alcatraz
 
 Environment config
 ------------------

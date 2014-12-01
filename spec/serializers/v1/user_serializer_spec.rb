@@ -3,7 +3,6 @@ module V1
     let(:user) { build(:user) }
     subject { described_class.new(user).attributes }
 
-    it { expect(subject[:username]).to eq(user.username) }
     it { expect(subject[:email]).to eq(user.email) }
     it { expect(subject[:authentication_token]).to eq(user.authentication_token) }
     it { expect(subject[:created_at]).to eq(user.created_at) }

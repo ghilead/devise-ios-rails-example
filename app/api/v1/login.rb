@@ -2,7 +2,7 @@ module V1
   class Login < Grape::API
     desc 'User login'
     params do
-      requires :username, type: String, desc: 'user username'
+      requires :email, type: String, desc: 'user email'
       requires :password, type: String, desc: 'user password'
     end
     post '/login', serializer: V1::UserSerializer do
@@ -11,7 +11,7 @@ module V1
 
     desc 'User login (not recommended)'
     params do
-      requires :username, type: String, desc: 'user username'
+      requires :email, type: String, desc: 'user email'
       requires :password, type: String, desc: 'user password'
     end
     get '/login', serializer: V1::UserSerializer do
