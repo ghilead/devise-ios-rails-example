@@ -67,6 +67,8 @@ module V1
             password: 'fictional',
           }
         end
+
+        it_behaves_like "an unauthorized JSON request"
       end
     end
   end
