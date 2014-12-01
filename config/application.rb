@@ -19,6 +19,6 @@ module Saaskit
     end
     config.paths.add File.join('app', 'api'), glob: File.join('**', '*.rb')
     config.autoload_paths << Rails.root.join('lib')
-    config.autoload_paths += %W("#{config.root}/app/validators/")
+    config.autoload_paths << Rails.root.join(config.root, 'app', 'services')
   end
 end
