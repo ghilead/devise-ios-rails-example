@@ -14,6 +14,14 @@ module V1
         error_response(message: error, status: 404)
       end
 
+      rescue_from ActiveRecord::RecordInvalid do |e|
+        error = Error.new(
+          message: e.message,
+          status: 422,
+          code: 0
+        )
+        error_response(message: error, status: 422)
+      end
 
       rescue_from Grape::Exceptions::ValidationErrors do |e|
         error = Error.new(
