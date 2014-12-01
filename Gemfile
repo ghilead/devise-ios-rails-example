@@ -24,7 +24,7 @@ gem 'coffee-rails'
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', platforms: [:mri_21]
-  gem 'capistrano'
+  gem 'capistrano', '3.2.1'
   gem 'capistrano-bundler'
   gem 'capistrano-rails'
   gem 'capistrano-rails-console'
