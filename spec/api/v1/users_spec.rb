@@ -1,0 +1,55 @@
+module V1
+  describe Users do
+    include Rack::Test::Methods
+    describe "login a user" do
+      let(:url) { 'v1/users' }
+      let(:user) { build(:user) }
+      subject { post url, params }
+
+      context "with valid params" do
+        let(:params) do
+          {
+            email: user.email,
+            password: user.password,
+          }
+        end
+
+        it_behaves_like "a successful JSON POST request"
+
+        it 'creates a new user' do
+          expect{ subject }.to change(User, :count).by(1)
+        end
+      end
+
+      context "with invalid params" do
+        invalid_params = [
+          {},
+          { email: 'ios_man@example.com' },
+          { password: 'alcatraz' },
+        ]
+        invalid_params.each do |invalid_param|
+          it_behaves_like "an unsuccessful JSON request" do
+            let(:params) { invalid_param }
+          end
+        end
+      end
+
+      context "with invalid email" do
+        let(:params) { { email: 'invalid_email', password: 'alcatraz' } }
+
+        it_behaves_like "a bad request", 422
+
+        it 'returns error object' do
+          error = {
+            message: 'Validation failed: Email is invalid',
+            code: 0,
+            status: 422
+          }.stringify_keys
+          json_response = json_for(subject)
+
+          expect(json_response).to eq('error' => error)
+        end
+      end
+    end
+  end
+end
