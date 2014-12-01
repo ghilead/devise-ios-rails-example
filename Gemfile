@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 gem 'rails', '4.2.0.rc1'
 gem 'pg'
 
-gem 'devise', github: 'plataformatec/devise', branch: 'lm-rails-4-2'
+gem 'devise', github: 'plataformatec/devise'
 gem 'simple_token_authentication'
 gem 'dotenv-deployment'
 gem 'dotenv-rails'

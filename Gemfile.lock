@@ -14,10 +14,9 @@ GIT
 
 GIT
   remote: git://github.com/plataformatec/devise.git
-  revision: 1d8890b77372b9c4fd3ec8e9b4963d76774ed33c
-  branch: lm-rails-4-2
+  revision: 6fb466eb1e70c2aaa5d64f4cd464a26acfb671c0
   specs:
-    devise (3.3.0)
+    devise (3.4.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 3.2.6, < 5)
@@ -182,7 +181,7 @@ GEM
     grape-swagger-rails (0.0.10)
       grape-swagger (~> 0.7.2)
       railties (>= 3.2.12)
-    guard (2.10.0)
+    guard (2.10.1)
       formatador (>= 0.2.4)
       listen (~> 2.7)
       lumberjack (~> 1.0)
