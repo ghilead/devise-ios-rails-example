@@ -3,6 +3,7 @@ module V1
     describe "login a user" do
       let(:user) { create(:user) }
       let(:login_context) { double }
+
       before { allow(login_context).to receive(:error!) }
       subject { described_class.new(params, login_context).call }
 
@@ -27,10 +28,9 @@ module V1
             password: 'fictional',
           }
         end
-
         it 'calls error method in the context' do
           subject
-          expect(login_context).to have_received(:error!).with('unauthorized', 401)
+          expect(login_context).to have_received(:error!).with(any_args, 401)
         end
       end
 
@@ -45,7 +45,7 @@ module V1
 
         it 'calls error method in the context' do
           subject
-          expect(login_context).to have_received(:error!).with('unauthorized', 401)
+          expect(login_context).to have_received(:error!).with(any_args, 401)
         end
       end
     end
