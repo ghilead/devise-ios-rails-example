@@ -19,6 +19,17 @@ module V1
         it 'creates a new user' do
           expect{ subject }.to change(User, :count).by(1)
         end
+
+        it "returns a user" do
+          json_response = json_for(subject)
+          expect(json_response).to have_key('user')
+        end
+
+        it "serializes user with user serializer" do
+          json = subject.body
+          user = User.find_by_email(params[:email])
+          expect(json).to eq UserSerializer.new(user).to_json
+        end
       end
 
       context "with invalid params" do
