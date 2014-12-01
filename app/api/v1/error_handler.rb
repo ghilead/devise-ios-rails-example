@@ -6,18 +6,34 @@ module V1
       error_formatter :json, ErrorFormatter
 
       rescue_from ActiveRecord::RecordNotFound do |e|
-        error_response(message: e.message, status: 404)
+        error = Error.new(
+          message: e.message,
+          status: 404,
+          code: 0
+        )
+        error_response(message: error, status: 404)
       end
 
+
       rescue_from Grape::Exceptions::ValidationErrors do |e|
-        error_response(message: e.message, status: e.status)
+        error = Error.new(
+          message: e.message,
+          status: e.status,
+          code: 0
+        )
+        error_response(message: error, status: e.status)
       end
 
       rescue_from :all do |e|
         if Rails.env.development? || Rails.env.test?
           raise e
         else
-          error_response(message: "Internal server error", status: 500)
+          error = Error.new(
+            message: 'Internal server error',
+            status: 500,
+            code: 0
+          )
+          error_response(message: error, status: 500)
         end
       end
     end
