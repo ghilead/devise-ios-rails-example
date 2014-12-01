@@ -6,11 +6,7 @@ module V1
       requires :password, type: String, desc: 'user password'
     end
     post '/login', serializer: V1::UserSerializer do
-      user = User.find_by_username(snake_declared_params[:username])
-      if user.present? && user.valid_password?(snake_declared_params[:password])
-        user
-      else
-        error!('unauthorized', 401)
+      V1::LoginService.new(snake_declared_params, self).call
       end
     end
   end
