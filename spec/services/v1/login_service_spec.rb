@@ -5,6 +5,7 @@ module V1
       let(:login_context) { double }
 
       before { allow(login_context).to receive(:error!) }
+
       subject { described_class.new(params, login_context).call }
 
       context "with a valid user" do
