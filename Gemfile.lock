@@ -219,6 +219,8 @@ GEM
     kramdown (1.5.0)
     launchy (2.4.3)
       addressable (~> 2.3)
+    letter_opener (1.2.0)
+      launchy (~> 2.2)
     listen (2.8.3)
       celluloid (>= 0.15.2)
       rb-fsevent (>= 0.9.3)
@@ -437,6 +439,7 @@ DEPENDENCIES
   guard-rspec
   haml-rails
   launchy
+  letter_opener
   netguru!
   nokogiri
   omniauth
