@@ -11,6 +11,7 @@ module V1
 
     mount V1::Login
     mount V1::Users
+    mount V1::RequestPasswordReset
 
     add_swagger_documentation(api_version: 'v1')
   end
