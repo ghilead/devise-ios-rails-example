@@ -9,8 +9,8 @@ module V1
       context "with an existing email" do
         let(:params) { { email: user.email } }
 
-        it "returns nil" do
-          expect(subject).to be_nil
+        it "returns a user" do
+          expect(subject).to eq user
         end
 
         it "sets reset_password_token on a user" do

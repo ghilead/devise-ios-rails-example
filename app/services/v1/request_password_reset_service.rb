@@ -10,6 +10,7 @@ module V1
 
     def call
       user.send_reset_password_instructions
+      user
     end
   end
 end
