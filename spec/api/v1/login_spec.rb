@@ -15,7 +15,7 @@ module V1
             }
           end
 
-          it_behaves_like 'a good request', 200
+          it_behaves_like 'a good JSON request', 200
         end
 
         context "with invalid params" do

@@ -50,7 +50,7 @@ module V1
       context "with invalid email" do
         let(:params) { { email: 'invalid_email', password: 'alcatraz' } }
 
-        it_behaves_like "a bad request", 422
+        it_behaves_like "a bad JSON request", 422
 
         it 'returns error object' do
           error = {
