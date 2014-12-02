@@ -16,7 +16,7 @@ module V1
           }
         end
 
-        it 'returns an authenticated user' do
+        it "returns an authenticated user" do
           expect(subject).to eq user
           expect(login_context).not_to have_received(:error!)
         end
@@ -29,7 +29,7 @@ module V1
             password: 'fictional',
           }
         end
-        it 'calls error method in the context' do
+        it "calls error method in the context" do
           subject
           expect(login_context).to have_received(:error!).with(any_args, 401)
         end
@@ -44,7 +44,7 @@ module V1
           }
         end
 
-        it 'calls error method in the context' do
+        it "calls error method in the context" do
           subject
           expect(login_context).to have_received(:error!).with(any_args, 401)
         end
