@@ -1,0 +1,40 @@
+module V1
+  describe RequestPasswordResetService do
+    describe "request a password reset" do
+      let(:user) { create(:user) }
+      let(:reset_context) { double }
+
+      subject { described_class.new(params, reset_context).call }
+
+      context "with an existing email" do
+        let(:params) { { email: user.email } }
+
+        it "returns nil" do
+          expect(subject).to be_nil
+        end
+
+        it "sets reset_password_token on a user" do
+          subject
+          expect(user.reload.reset_password_token).not_to be_nil
+        end
+
+        it "saves the date when the password was requested to reset" do
+          subject
+          expect(user.reload.reset_password_sent_at).not_to be_nil
+        end
+
+        it "sends reset instructions to a user" do
+          expect{ subject }.to change(ActionMailer::Base.deliveries, :count).by(1)
+        end
+      end
+
+      context "there is no such user" do
+        let(:params) { { email: 'non_existent' } }
+
+        it "calls error method in the context" do
+          expect{ subject }.to raise_error(ActiveRecord::RecordNotFound)
+        end
+      end
+    end
+  end
+end
