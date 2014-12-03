@@ -14,8 +14,8 @@ module V1
       end
 
       def authorize!
-        return error!(UnauthorizedError.new, 401) if token.nil?
-        return error!(ForbiddenError.new, 403) if current_user.nil?
+        raise(UnauthorizedError) if token.nil?
+        raise(ForbiddenError) if current_user.nil?
         current_user
       end
     end

@@ -1,8 +1,6 @@
 module V1
   module Helpers
     describe Authentication do
-      before { allow(helper).to receive(:error!) }
-
       let(:helper) { double.extend(described_class) }
       let(:user) { create(:user) }
       let(:valid_token) { user.authentication_token }
@@ -23,8 +21,7 @@ module V1
           before { allow(helper).to receive(:token).and_return(nil) }
 
           it "fails with forbidden error" do
-            subject
-            expect(helper).to have_received(:error!).with(kind_of(UnauthorizedError), 401)
+            expect{ subject }.to raise_error(UnauthorizedError)
           end
         end
 
@@ -33,8 +30,7 @@ module V1
           before { allow(helper).to receive(:current_user).and_return(nil) }
 
           it "fails with forbidden error" do
-            subject
-            expect(helper).to have_received(:error!).with(kind_of(ForbiddenError), 403)
+            expect{ subject }.to raise_error(ForbiddenError)
           end
         end
       end
