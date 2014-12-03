@@ -1,5 +1,5 @@
 module V1
-  describe Users do
+  describe UnauthorizedUsers do
     include Rack::Test::Methods
 
     describe "login a user" do

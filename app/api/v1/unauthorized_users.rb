@@ -1,5 +1,5 @@
 module V1
-  class Users < Grape::API
+  class UnauthorizedUsers < Grape::API
     resources :users do
       desc 'User Sign up'
       params do

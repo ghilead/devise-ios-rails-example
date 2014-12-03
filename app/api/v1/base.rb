@@ -10,8 +10,8 @@ module V1
     helpers V1::Helpers::Params
 
     mount V1::Login
-    mount V1::Users
     mount V1::RequestPasswordReset
+    mount V1::UnauthorizedUsers
 
     add_swagger_documentation(api_version: 'v1')
   end
