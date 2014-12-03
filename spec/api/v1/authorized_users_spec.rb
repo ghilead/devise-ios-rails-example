@@ -2,6 +2,35 @@ module V1
   describe AuthorizedUsers do
     include Rack::Test::Methods
 
+    describe "Delete Own Account" do
+      before { params.merge! authentication_token: user.authentication_token }
+
+      let(:url) { 'v1/users' }
+      let(:user) { create(:user) }
+      let(:params) { {} }
+
+      subject { delete url, params }
+
+      it_behaves_like "needs authorization"
+
+      context "with valid token" do
+        it_behaves_like "a successful JSON DELETE request"
+
+        it "removes a user" do
+          expect{ subject }.to change(User, :count).by(-1)
+        end
+
+        it "returns a user" do
+          json_response = json_for(subject)
+          expect(json_response).to have_key('user')
+        end
+
+        it "serializes user with user serializer" do
+          expect(subject.body).to eq UserSerializer.new(user).to_json
+        end
+      end
+    end
+
     describe "Update User" do
       before { params.merge! authentication_token: user.authentication_token }
 
@@ -10,6 +39,8 @@ module V1
       let(:params) { attributes_for(:user) }
 
       subject { put url, params }
+
+      it_behaves_like "needs authorization"
 
       context "with valid token" do
         it_behaves_like "a successful JSON PUT request"
@@ -25,12 +56,6 @@ module V1
         it "serializes user with user serializer" do
           expect(subject.body).to eq UserSerializer.new(user).to_json
         end
-      end
-
-      context "with invalid token" do
-        before { params.merge! authentication_token: 'invalid token' }
-
-        it_behaves_like "a forbidden JSON request"
       end
 
       context "with invalid params" do
