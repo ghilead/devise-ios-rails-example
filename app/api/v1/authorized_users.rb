@@ -13,8 +13,11 @@ module V1
       end
 
       desc 'Delete Own Account'
-      delete '/', serializer: V1::UserSerializer do
-        V1::DeleteOwnAccountService.new(current_user).call
+      params do
+        requires :id, type: String, desc: 'user id'
+      end
+      delete ':id', serializer: V1::UserSerializer do
+        V1::DeleteOwnAccountService.new(current_user, snake_declared_params).call
       end
     end
   end

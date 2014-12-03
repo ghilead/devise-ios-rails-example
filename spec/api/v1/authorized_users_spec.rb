@@ -5,7 +5,7 @@ module V1
     describe "Delete Own Account" do
       before { params.merge! authentication_token: user.authentication_token }
 
-      let(:url) { 'v1/users' }
+      let(:url) { "v1/users/#{user.id}" }
       let(:user) { create(:user) }
       let(:params) { {} }
 
@@ -28,6 +28,13 @@ module V1
         it "serializes user with user serializer" do
           expect(subject.body).to eq UserSerializer.new(user).to_json
         end
+      end
+
+      context "with id not matching current user" do
+        let(:other_user) { create(:user) }
+        let(:url) { "v1/users/#{other_user.id}" }
+
+        it_behaves_like "a forbidden JSON request"
       end
     end
 
@@ -62,7 +69,7 @@ module V1
 
           expect(json_response).to eq(expected)
         end
-        end
+      end
 
       context "with id not matching current user" do
         let(:other_user) { create(:user) }
