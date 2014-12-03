@@ -10,7 +10,7 @@ FactoryGirl.define do
       )
     end
 
-    ignore do
+    transient do
       message 'Unexpected Error!'
       status 500
       code 0
