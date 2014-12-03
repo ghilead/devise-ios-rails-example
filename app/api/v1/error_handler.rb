@@ -23,6 +23,10 @@ module V1
         error_response(message: error, status: 422)
       end
 
+      rescue_from UnauthorizedError do |e|
+        error_response(message: e, status: 401)
+      end
+
       rescue_from Grape::Exceptions::ValidationErrors do |e|
         error = Error.new(
           message: e.message,
