@@ -1,10 +1,9 @@
 module V1
   class RegisterService
-    attr_reader :params, :user, :context
+    attr_reader :params, :user
 
-    def initialize(params, context)
+    def initialize(params)
       @params = params
-      @context = context
       @user = User.new(@params)
     end
 

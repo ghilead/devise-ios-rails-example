@@ -2,9 +2,8 @@ module V1
   describe RequestPasswordResetService do
     describe "request a password reset" do
       let(:user) { create(:user) }
-      let(:reset_context) { double }
 
-      subject { described_class.new(params, reset_context).call }
+      subject { described_class.new(params).call }
 
       context "with an existing email" do
         let(:params) { { email: user.email } }

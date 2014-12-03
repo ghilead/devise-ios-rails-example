@@ -6,7 +6,7 @@ module V1
     end
     post '/requestPasswordReset' do
       status 204
-      V1::RequestPasswordResetService.new(snake_declared_params, self).call
+      V1::RequestPasswordResetService.new(snake_declared_params).call
     end
   end
 end

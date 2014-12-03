@@ -1,10 +1,9 @@
 module V1
   class LoginService
-    attr_reader :params, :user, :context
+    attr_reader :params, :user
 
-    def initialize(params, context)
+    def initialize(params)
       @params = params
-      @context = context
       @user = User.find_by_email(@params[:email])
     end
 
@@ -12,7 +11,7 @@ module V1
       if authenticated?
         user
       else
-        context.error!(UnauthorizedError.new, 401)
+        raise UnauthorizedError
       end
     end
 

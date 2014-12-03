@@ -1,11 +1,10 @@
 module V1
   class UpdateUserService
-    attr_reader :user, :params, :context
+    attr_reader :user, :params
 
-    def initialize(user, params, context)
+    def initialize(user, params)
       @user = user
       @params = params
-      @context = context
     end
 
     def call

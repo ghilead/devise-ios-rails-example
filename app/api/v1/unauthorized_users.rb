@@ -7,7 +7,7 @@ module V1
         requires :password, type: String, desc: 'user password'
       end
       post '/', serializer: V1::UserSerializer do
-        V1::RegisterService.new(snake_declared_params, self).call
+        V1::RegisterService.new(snake_declared_params).call
       end
     end
   end

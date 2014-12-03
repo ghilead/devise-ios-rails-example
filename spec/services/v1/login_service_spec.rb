@@ -2,11 +2,8 @@ module V1
   describe LoginService do
     describe "login a user" do
       let(:user) { create(:user) }
-      let(:login_context) { double }
 
-      before { allow(login_context).to receive(:error!) }
-
-      subject { described_class.new(params, login_context).call }
+      subject { described_class.new(params).call }
 
       context "with a valid user" do
         let(:params) do
@@ -18,7 +15,6 @@ module V1
 
         it "returns an authenticated user" do
           expect(subject).to eq user
-          expect(login_context).not_to have_received(:error!)
         end
       end
 
@@ -30,8 +26,7 @@ module V1
           }
         end
         it "calls error method in the context" do
-          subject
-          expect(login_context).to have_received(:error!).with(any_args, 401)
+          expect{ subject }.to raise_error(UnauthorizedError)
         end
       end
 
@@ -45,8 +40,7 @@ module V1
         end
 
         it "calls error method in the context" do
-          subject
-          expect(login_context).to have_received(:error!).with(any_args, 401)
+          expect{ subject }.to raise_error(UnauthorizedError)
         end
       end
     end
