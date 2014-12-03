@@ -34,7 +34,7 @@ module V1
     describe "Update User" do
       before { params.merge! authentication_token: user.authentication_token }
 
-      let(:url) { 'v1/users' }
+      let(:url) { "v1/users/#{user.id}" }
       let(:user) { create(:user) }
       let(:params) { attributes_for(:user) }
 
@@ -44,6 +44,7 @@ module V1
 
       context "with valid token" do
         it_behaves_like "a successful JSON PUT request"
+
         it "doesn't create a new record" do
           expect{ subject }.not_to change(User, :count)
         end
@@ -54,12 +55,24 @@ module V1
         end
 
         it "serializes user with user serializer" do
-          expect(subject.body).to eq UserSerializer.new(user).to_json
+          json_response = json_for(subject)['user'].except('createdAt', 'updatedAt', 'id')
+          expected = JSON.parse(UserSerializer.new(
+            User.new(params)).to_json
+          )['user'].except('createdAt', 'updatedAt', 'id')
+
+          expect(json_response).to eq(expected)
         end
+        end
+
+      context "with id not matching current user" do
+        let(:other_user) { create(:user) }
+        let(:url) { "v1/users/#{other_user.id}" }
+
+        it_behaves_like "a forbidden JSON request"
       end
 
       context "with invalid params" do
-        let(:params) { { email: 'not_valid_email' } }
+        let(:params) { attributes_for(:user, email: 'not_valid_email') }
 
         it_behaves_like "a bad JSON request", 422
 

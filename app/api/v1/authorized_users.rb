@@ -3,12 +3,12 @@ module V1
     before { authorize! }
 
     resources :users do
-
       desc 'Update User'
       params do
+        requires :id, type: String, desc: 'user id'
         optional :email, type: String, desc: 'user email'
       end
-      put '/', serializer: V1::UserSerializer do
+      put ':id', serializer: V1::UserSerializer do
         V1::UpdateUserService.new(current_user, snake_declared_params).call
       end
 
