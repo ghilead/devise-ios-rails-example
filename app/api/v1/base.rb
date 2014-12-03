@@ -13,6 +13,8 @@ module V1
     mount V1::RequestPasswordReset
     mount V1::UnauthorizedUsers
 
+    mount V1::AuthorizedUsers
+
     add_swagger_documentation(api_version: 'v1')
   end
 end
