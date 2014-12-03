@@ -2,22 +2,21 @@ module V1
   module Helpers
     module Authentication
       def current_user
-        warden.user
+        @current_user ||= authenticate
       end
 
-      def authenticated_user
-        authenticated
-        error!('Forbidden', 403) unless current_user
+      def authenticate
+        User.find_by_authentication_token(token)
       end
 
-      private
-
-      def warden
-        env.fetch('warden')
+      def token
+        params[:authentication_token] || headers['X-Authentication-Token']
       end
 
-      def authenticated
-        error!('Unauthorized', 401) unless warden.authenticated?
+      def authorize!
+        return error!(UnauthorizedError.new, 401) if token.nil?
+        return error!(ForbiddenError.new, 403) if current_user.nil?
+        current_user
       end
     end
   end
