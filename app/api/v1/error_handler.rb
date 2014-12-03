@@ -36,12 +36,7 @@ module V1
         if Rails.env.development? || Rails.env.test?
           raise e
         else
-          error = Error.new(
-            message: 'Internal server error',
-            status: 500,
-            code: 0
-          )
-          error_response(message: error, status: 500)
+          error_response(message: InternalServerError.new, status: 500)
         end
       end
     end
