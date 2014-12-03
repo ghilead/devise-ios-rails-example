@@ -27,6 +27,10 @@ module V1
         error_response(message: e, status: 401)
       end
 
+      rescue_from ForbiddenError do |e|
+        error_response(message: e, status: 403)
+      end
+
       rescue_from Grape::Exceptions::ValidationErrors do |e|
         error = Error.new(
           message: e.message,
