@@ -76,7 +76,6 @@ shared_examples "a forbidden JSON request" do
   end
 end
 
-
 shared_examples "a not found JSON request" do
   it_behaves_like "a bad JSON request", 404
 end
