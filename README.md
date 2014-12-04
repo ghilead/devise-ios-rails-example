@@ -1,12 +1,12 @@
-Open Source Saaskit Rails Backend
+Open Source Devise iOS Rails Backend
 =================================
 
-[![Circle CI](https://circleci.com/gh/netguru/saaskit-rails.svg?style=svg)](https://circleci.com/gh/netguru/saaskit-rails)
+[![Circle CI](https://circleci.com/gh/netguru/devise-ios-rails-example.svg?style=svg)](https://circleci.com/gh/netguru/devise-ios-rails-example)
 [![Code Climate](https://codeclimate.com/repos/54734062e30ba07474053280/badges/398895b59d76c0c16cd2/gpa.svg)](https://codeclimate.com/repos/54734062e30ba07474053280/feed)
 [![Test Coverage](https://codeclimate.com/repos/54734062e30ba07474053280/badges/398895b59d76c0c16cd2/coverage.svg)](https://codeclimate.com/repos/54734062e30ba07474053280/feed)
-[![Dependency](https://img.shields.io/gemnasium/netguru/saaskit-rails.svg)](https://gemnasium.com/netguru/saaskit-rails)
+[![Dependency](https://img.shields.io/gemnasium/netguru/devise-ios-rails-example.svg)](https://gemnasium.com/netguru/devise-ios-rails-example)
 
-A rails backend for demonstrating how [Saaskit for iOS][ios_saaskit] works.
+A rails backend for demonstrating how [Devise for iOS][ios_devise] works.
 
 How to use
 ==========
@@ -25,7 +25,7 @@ $ curl \
 -H 'Accept: application/json' \
 -H 'Content-Type: application/json' \
 -X POST -d '{ "user": { "email": "user@example.com", "password": "1234" } }' \
-https://devise-ios-rails-example.herokuapp.com/users
+https://devise-ios-rails-example.herokuapp.com/v1/users
 ```
 
 in return you will get a newly created user
@@ -47,7 +47,7 @@ $ curl \
 -H 'Accept: application/json' \
 -H 'Content-Type: application/json' \
 -X POST -d '{ "user": { "email": "user@example.com", "password": "1234" } }' \
-https://devise-ios-rails-example.herokuapp.com/users/sign_in
+https://devise-ios-rails-example.herokuapp.com/v1/users/sign_in
 ```
 
 you will get again the same data:
@@ -70,7 +70,7 @@ $ curl \
 -H 'Content-Type: application/json' \
 -H 'X-User-Email: user@example.com' \
 -H 'X-User-Token: 2-D9jBtnAPcP8fppzJAL' \
--X GET https://devise-ios-rails-example.herokuapp.com/secret_spaces/new
+-X GET https://devise-ios-rails-example.herokuapp.com/v1/secret_spaces/new
 ```
 
 response: `{ "id": null, "text": null, "created_at": null, "updated_at": null }`
@@ -81,8 +81,8 @@ in order to check how password reset works:
 $ curl \
 -H 'Accept: application/json' \
 -H 'Content-Type: application/json' \
--X POST -d '{ "user": { "email": "user@example.com" } }'
-https://devise-ios-rails-example.herokuapp.com/users/password
+-X POST -d '{ "user": { "email": "user@example.com" } }' \
+https://devise-ios-rails-example.herokuapp.com/v1/users/password
 ```
 
 you receive response status 204 (no content). In the meantime, server sends instructions on how to reset the password, which you should follow. On heroku we use `letter_opener_web` gem therefore those emails are stored at [https://devise-ios-rails-example.herokuapp.com/letter_opener](https://devise-ios-rails-example.herokuapp.com/letter_opener).
@@ -92,25 +92,25 @@ Here is a complete list of paths:
 - Useful Devise paths
 
 ```
-               login - POST   /users/sign_in
-               login - GET    /users/sign_in
-            register - POST   /users
-         update user - PUT    /users
-         delete user - DELETE /users
-change user password - PUT    /users/password
-      password reset - POST   /users/password
+               login - POST   /v1/users/sign_in
+               login - GET    /v1/users/sign_in
+            register - POST   /v1/users
+         update user - PUT    /v1/users
+         delete user - DELETE /v1/users
+change user password - PUT    /v1/users/password
+      password reset - POST   /v1/users/password
 ```
 
 - Secret Spaces for demonstration purposes
 
 ```
-               index - GET    /secret_spaces
-                show - GET    /secret_spaces/:id
-                 new - GET    /secret_spaces/new
-              create - POST   /secret_spaces
-                edit - GET    /secret_spaces/:id/edit
-              update - PUT    /secret_spaces/:id
-              delete - DELETE /secret_spaces/password/:id
+               index - GET    /v1/secret_spaces
+                show - GET    /v1/secret_spaces/:id
+                 new - GET    /v1/secret_spaces/new
+              create - POST   /v1/secret_spaces
+                edit - GET    /v1/secret_spaces/:id/edit
+              update - PUT    /v1/secret_spaces/:id
+              delete - DELETE /v1/secret_spaces/password/:id
 ```
 
 Requirements
@@ -119,7 +119,7 @@ Requirements
 | Name |  Version |
 | :--: | :---: |
 | [Ruby][ruby] | 2.1.5 |
-| [Ruby on Rails][rails] | 4.2 |
+| [Ruby on Rails][rails] | 4.1.8 |
 
 You can find some guidelines on how to install above [on mac][mac_guidelines] and [on ubuntu][ubuntu_guidelines]
 
@@ -131,7 +131,7 @@ You can find some guidelines on how to install above [on mac][mac_guidelines] an
 Setup
 =====
 
-- clone repo to your local machine `git clone https://github.com/netguru/saaskit-rails.git ./saaskit-rails`
+- clone repo to your local machine `git clone https://github.com/netguru/devise-ios-rails.git ./devise-ios-rails`
 
 Database config
 ---------------
@@ -143,8 +143,8 @@ Database config
 development:
   adapter: sqlite3
   host: localhost
-  database: saaskit_development.sqlite3
-  username: saaskit
+  database: devise_ios_rails_development.sqlite3
+  username: devise_ios_rails
 ```
 
 - and create a database:
@@ -178,7 +178,7 @@ Before you start app be sure that PostgreSQL is already running. Then start Rail
 Tests
 =====
 
-- you run tests with `rspec`
+- you run tests with `spring rspec`
 
 Other tools
 ===========
@@ -212,7 +212,7 @@ Copyright  2014 © [Netguru][netguru_url], released under the New BSD License
 [ruby]: https://www.ruby-lang.org
 [rails]: http://www.rubyonrails.org
 [postgres]: http://www.postgresql.org
-[ios_saaskit]: https://github.com/netguru/saaskit
+[ios_devise]: https://github.com/netguru/devise-ios
 [mac_guidelines]: https://gorails.com/setup/osx/10.10-yosemite
 [ubuntu_guidelines]: https://gorails.com/setup/ubuntu/14.10
 [postgres_guidelines]: https://wiki.postgresql.org/wiki/Detailed_installation_guides
