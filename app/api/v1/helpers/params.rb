@@ -1,20 +1,19 @@
 module V1
   module Helpers
     module Params
-      def camelize(params)
+      def deep_underscore(params)
         params.deep_transform_keys! do |key|
-          camelized = key.to_s.camelize
-          camelized[0] = camelized[0].swapcase
-          camelized.to_sym
+          underscore = key.to_s.underscore
+          underscore.to_sym
         end
       end
 
       def snake_declared_params
-        camelize(declared(params))
+        deep_underscore(declared(params))
       end
 
       def snake_params
-        camelize(params)
+        deep_underscore(params)
       end
     end
   end
