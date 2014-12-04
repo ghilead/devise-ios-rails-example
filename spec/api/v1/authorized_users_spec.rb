@@ -96,5 +96,70 @@ module V1
       end
     end
 
+    describe "Change User password" do
+      before { params.merge! authentication_token: user.authentication_token }
+
+      let(:url) { "v1/users/#{user.id}/password" }
+      let(:user) { create(:user) }
+      let(:params) do
+        {
+          password: 'new_pass',
+          passwordConfirmation: 'new_pass',
+        }
+      end
+
+      subject { put url, params }
+
+      it_behaves_like "needs authorization"
+
+      context "with valid token" do
+        it_behaves_like "a successful JSON PUT request"
+
+        it "doesn't create a new record" do
+          expect{ subject }.not_to change(User, :count)
+        end
+
+        it "returns a user" do
+          json_response = json_for(subject)
+          expect(json_response).to have_key('user')
+        end
+
+        it "changes user password" do
+          expect{ json_for(subject)['user']['password'] }
+            .to change{ user.reload.encrypted_password }
+        end
+      end
+
+      context "with id not matching current user" do
+        let(:other_user) { create(:user) }
+        let(:url) { "v1/users/#{other_user.id}/password" }
+
+        it_behaves_like "a forbidden JSON request"
+      end
+
+      context "with invalid params" do
+        let(:params) do
+          {
+            password: 'new_pass',
+            passwordConfirmation: 'not_match',
+          }
+        end
+
+        it_behaves_like "a bad JSON request", 422
+
+        it "returns error object" do
+          error = {
+            message: "Validation failed: Password confirmation doesn't match Password",
+            code: 0,
+            status: 422
+          }.stringify_keys
+          json_response = json_for(subject)
+
+          expect(json_response).to eq('error' => error)
+        end
+      end
+    end
+
+
   end
 end

@@ -19,6 +19,16 @@ module V1
       delete ':id', serializer: V1::UserSerializer do
         V1::DeleteOwnAccountService.new(current_user, snake_declared_params).call
       end
+
+      desc 'Change User password'
+      params do
+        requires :id, type: String, desc: 'user id'
+        requires :password, type: String, desc: 'new password'
+        requires :passwordConfirmation, type: String, desc: 'repeated new password'
+      end
+      put ':id/password', serializer: V1::UserSerializer do
+        V1::ChangePasswordService.new(current_user, snake_declared_params).call
+      end
     end
   end
 end
