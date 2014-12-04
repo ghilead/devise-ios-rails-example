@@ -5,7 +5,7 @@ module V1
     resources :users do
       desc 'Update User'
       params do
-        requires :id, type: String, desc: 'user id'
+        requires :id, type: Integer, desc: 'user id'
         optional :email, type: String, desc: 'user email'
       end
       put ':id', serializer: V1::UserSerializer do
@@ -14,7 +14,7 @@ module V1
 
       desc 'Delete Own Account'
       params do
-        requires :id, type: String, desc: 'user id'
+        requires :id, type: Integer, desc: 'user id'
       end
       delete ':id', serializer: V1::UserSerializer do
         V1::DeleteOwnAccountService.new(current_user, snake_declared_params).call
@@ -22,7 +22,7 @@ module V1
 
       desc 'Change User password'
       params do
-        requires :id, type: String, desc: 'user id'
+        requires :id, type: Integer, desc: 'user id'
         requires :password, type: String, desc: 'new password'
         requires :passwordConfirmation, type: String, desc: 'repeated new password'
       end
