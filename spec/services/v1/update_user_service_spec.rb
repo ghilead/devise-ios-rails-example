@@ -3,7 +3,7 @@ module V1
     let(:user) { create(:user) }
     let(:params) { attributes_for(:user, id: user.id, email: 'new@example.com') }
 
-    subject { described_class.new(user, params).call }
+    subject { described_class.new(user, params).call! }
 
     it "returns a user" do
       expect(subject).to be_a User
@@ -15,7 +15,7 @@ module V1
 
     context "with a blank params" do
       [{}, nil].each do |blank_params|
-        subject { described_class.new(user, blank_params).call }
+        subject { described_class.new(user, blank_params).call! }
 
         it "raises not found error" do
           expect{ subject }.to raise_error(ActiveRecord::RecordNotFound)
@@ -24,7 +24,7 @@ module V1
     end
 
     context "with a nil instead of a user" do
-      subject { described_class.new(nil, params).call }
+      subject { described_class.new(nil, params).call! }
 
       it { is_expected.to be_nil }
     end

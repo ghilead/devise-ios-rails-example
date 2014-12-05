@@ -8,7 +8,7 @@ module V1
       @user_to_update = User.find(@params[:id])
     end
 
-    def call
+    def call!
       return if current_user.nil?
       raise(ForbiddenError) if current_user != user_to_update
       user_to_update.update_attributes! Hash(params)

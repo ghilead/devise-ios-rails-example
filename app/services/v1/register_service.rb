@@ -7,7 +7,7 @@ module V1
       @user = User.new(@params)
     end
 
-    def call
+    def call!
       @user.save!
       @user
     end

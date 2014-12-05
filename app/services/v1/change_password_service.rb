@@ -7,7 +7,7 @@ module V1
       @user_to_change_password = User.find(@params[:id])
     end
 
-    def call
+    def call!
       return if current_user.nil?
       raise(ForbiddenError) if current_user != user_to_change_password
       user_to_change_password.attributes = params

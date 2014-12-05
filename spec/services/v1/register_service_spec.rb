@@ -1,7 +1,7 @@
 module V1
   describe RegisterService do
     describe "register a user" do
-      subject { described_class.new(params).call }
+      subject { described_class.new(params).call! }
 
       context "with valid params" do
         let(:params) { attributes_for(:user) }

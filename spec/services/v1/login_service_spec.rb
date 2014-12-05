@@ -3,7 +3,7 @@ module V1
     describe "login a user" do
       let(:user) { create(:user) }
 
-      subject { described_class.new(params).call }
+      subject { described_class.new(params).call! }
 
       context "with a valid user" do
         let(:params) do

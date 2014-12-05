@@ -3,7 +3,7 @@ module V1
     describe "request a password reset" do
       let(:user) { create(:user) }
 
-      subject { described_class.new(params).call }
+      subject { described_class.new(params).call! }
 
       context "with an existing email" do
         let(:params) { { email: user.email } }

@@ -7,7 +7,7 @@ module V1
       @user_to_delete = User.find(params[:id])
     end
 
-    def call
+    def call!
       return if current_user.nil?
       raise(ForbiddenError) if current_user != user_to_delete
       user_to_delete.destroy!

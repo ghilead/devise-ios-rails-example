@@ -7,7 +7,7 @@ module V1
       @user = User.find_by_email!(@params[:email])
     end
 
-    def call
+    def call!
       user.send_reset_password_instructions
       user
     end

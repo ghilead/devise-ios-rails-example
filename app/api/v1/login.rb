@@ -7,7 +7,7 @@ module V1
     end
     post '/login', serializer: V1::UserSerializer do
       status 200
-      V1::LoginService.new(snake_declared_params).call
+      V1::LoginService.new(snake_declared_params).call!
     end
 
     desc 'User login (not recommended)'
@@ -16,7 +16,7 @@ module V1
       requires :password, type: String, desc: 'user password'
     end
     get '/login', serializer: V1::UserSerializer do
-      V1::LoginService.new(snake_declared_params).call
+      V1::LoginService.new(snake_declared_params).call!
     end
   end
 end
