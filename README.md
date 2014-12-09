@@ -80,6 +80,7 @@ Here is a complete list of paths:
          delete user - DELETE /users
 change user password - PUT    /users/password
       password reset - POST   /users/password
+```
 
 - Secret Spaces for demonstration purposes
 
