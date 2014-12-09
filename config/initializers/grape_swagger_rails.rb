@@ -1,4 +1,5 @@
-GrapeSwaggerRails.options.url = '/swagger_doc.json'
+GrapeSwaggerRails.options.url = '/swagger_doc'
 GrapeSwaggerRails.options.app_name = 'Saaskit'
 GrapeSwaggerRails.options.app_url = ENV.fetch('DOMAIN_URL')
 GrapeSwaggerRails.options.hide_format = true
+GrapeSwaggerRails.options.markdown = false
