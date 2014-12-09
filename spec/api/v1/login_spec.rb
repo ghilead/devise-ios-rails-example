@@ -10,8 +10,10 @@ module V1
         context "with valid params" do
           let(:params) do
             {
-              email: user.email,
-              password: user.password,
+              user: {
+                email: user.email,
+                password: user.password,
+              }
             }
           end
 
@@ -21,8 +23,8 @@ module V1
         context "with invalid params" do
           invalid_params = [
             {},
-            { email: 'ios_man@example.com' },
-            { password: 'alcatraz' },
+            { user: { email: 'ios_man@example.com' } },
+            { user: { password: 'alcatraz' } },
           ]
           invalid_params.each do |invalid_param|
             it_behaves_like "an unsuccessful JSON request" do
@@ -34,8 +36,10 @@ module V1
         context "with a valid user" do
           let(:params) do
             {
-              email: user.email,
-              password: user.password,
+              user: {
+                email: user.email,
+                password: user.password,
+              }
             }
           end
 
@@ -52,8 +56,10 @@ module V1
         context "there is no such user in DB" do
           let(:params) do
             {
-              email: 'non_existent',
-              password: 'fictional',
+              user: {
+                email: 'non_existent',
+                password: 'fictional',
+              }
             }
           end
 
@@ -63,8 +69,10 @@ module V1
         context "password doesn't match the user" do
           let(:params) do
             {
-              email: user.email,
-              password: 'fictional',
+              user: {
+                email: user.email,
+                password: 'fictional',
+              }
             }
           end
 

@@ -11,8 +11,10 @@ module V1
       context "with valid params" do
         let(:params) do
           {
-            email: user.email,
-            password: user.password,
+            user: {
+              email: user.email,
+              password: user.password,
+            }
           }
         end
 
@@ -29,7 +31,7 @@ module V1
 
         it "serializes user with user serializer" do
           json = subject.body
-          user = User.find_by_email(params[:email])
+          user = User.find_by_email(params[:user][:email])
           expect(json).to eq UserSerializer.new(user).to_json
         end
       end
@@ -37,8 +39,8 @@ module V1
       context "with invalid params" do
         invalid_params = [
           {},
-          { email: 'ios_man@example.com' },
-          { password: 'alcatraz' },
+          { user: { email: 'ios_man@example.com' } },
+          { user: { password: 'alcatraz' } },
         ]
         invalid_params.each do |invalid_param|
           it_behaves_like "an unsuccessful JSON request" do
@@ -48,7 +50,7 @@ module V1
       end
 
       context "with invalid email" do
-        let(:params) { { email: 'invalid_email', password: 'alcatraz' } }
+        let(:params) { { user: { email: 'invalid_email', password: 'alcatraz' } } }
 
         it_behaves_like "a bad JSON request", 422
 

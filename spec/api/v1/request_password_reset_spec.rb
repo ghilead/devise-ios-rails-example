@@ -9,7 +9,7 @@ module V1
       subject { post url, params }
 
       context "with valid params" do
-        let(:params) { { email: user.email } }
+        let(:params) { { user: { email: user.email } } }
 
 
         it "returns an OK (204) status code" do
@@ -26,7 +26,7 @@ module V1
       end
 
       context "there is no such user" do
-        let(:params) { { email: 'non_existent' } }
+        let(:params) { { user: { email: 'non_existent' } } }
 
         it "calls error method in the context" do
           json = json_for(subject)

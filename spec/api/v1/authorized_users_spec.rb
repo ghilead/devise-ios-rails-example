@@ -7,7 +7,7 @@ module V1
 
       let(:url) { "v1/users" }
       let(:user) { create(:user) }
-      let(:params) { attributes_for(:user) }
+      let(:params) { { user: attributes_for(:user) } }
 
       subject { put url, params }
 
@@ -33,7 +33,7 @@ module V1
       end
 
       context "with invalid params" do
-        let(:params) { attributes_for(:user, email: 'not_valid_email') }
+        let(:params) { { user: attributes_for(:user, email: 'not_valid_email') } }
 
         it_behaves_like "a bad JSON request", 422
 
@@ -86,8 +86,10 @@ module V1
       let(:user) { create(:user) }
       let(:params) do
         {
-          password: 'new_pass',
-          passwordConfirmation: 'new_pass',
+          user: {
+            password: 'new_pass',
+            passwordConfirmation: 'new_pass',
+          }
         }
       end
 
@@ -116,8 +118,10 @@ module V1
       context "with invalid params" do
         let(:params) do
           {
-            password: 'new_pass',
-            passwordConfirmation: 'not_match',
+            user: {
+              password: 'new_pass',
+              passwordConfirmation: 'not_match',
+            }
           }
         end
 
