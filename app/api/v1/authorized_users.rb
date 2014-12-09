@@ -15,7 +15,7 @@ module V1
 
       desc 'Delete Own Account', require_authentication_token_doc
       delete '/', serializer: V1::UserSerializer do
-        V1::DeleteOwnAccountService.new(current_user, snake_declared_params[:user]).call!
+        V1::DeleteOwnAccountService.new(current_user).call!
       end
 
       desc 'Change User password', require_authentication_token_doc

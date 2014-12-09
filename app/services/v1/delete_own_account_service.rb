@@ -1,8 +1,8 @@
 module V1
   class DeleteOwnAccountService
-    attr_reader :current_user, :params
+    attr_reader :current_user
 
-    def initialize(current_user, params)
+    def initialize(current_user)
       @current_user = current_user
     end
 
