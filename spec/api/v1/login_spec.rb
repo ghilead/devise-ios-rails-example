@@ -3,7 +3,7 @@ module V1
     include Rack::Test::Methods
     %w(get post).each do |request_method|
       describe "login a user" do
-        let(:url) { 'v1/login' }
+        let(:url) { 'v1/users/sign_in' }
         let(:user) { create(:user) }
         subject { public_send(request_method, url, params) }
 

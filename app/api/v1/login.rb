@@ -5,7 +5,7 @@ module V1
       requires :email, type: String, desc: 'user email'
       requires :password, type: String, desc: 'user password'
     end
-    post '/login', serializer: V1::UserSerializer do
+    post '/users/sign_in', serializer: V1::UserSerializer do
       status 200
       V1::LoginService.new(snake_declared_params).call!
     end
@@ -15,7 +15,7 @@ module V1
       requires :email, type: String, desc: 'user email'
       requires :password, type: String, desc: 'user password'
     end
-    get '/login', serializer: V1::UserSerializer do
+    get '/users/sign_in', serializer: V1::UserSerializer do
       V1::LoginService.new(snake_declared_params).call!
     end
   end
