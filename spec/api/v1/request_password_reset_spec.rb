@@ -3,7 +3,7 @@ module V1
     include Rack::Test::Methods
 
     describe "request a password reset" do
-      let(:url) { 'v1/requestPasswordReset' }
+      let(:url) { 'v1/users/password' }
       let(:user) { create(:user) }
 
       subject { post url, params }

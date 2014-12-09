@@ -2,7 +2,7 @@ module V1
   describe ChangePasswordService do
     let(:user) { create(:user) }
     let(:params) do
-      { id: user.id, password: 'fresh', password_confirmation: 'fresh' }
+      { password: 'fresh', password_confirmation: 'fresh' }
     end
 
     subject { described_class.new(user, params).call! }
@@ -18,21 +18,17 @@ module V1
     context "change a password of a different user" do
       let(:other_user) { create(:user) }
       let(:params) do
-        { id: other_user.id, password: 'fresh', password_confirmation: 'fresh' }
-      end
-
-      it 'raises forbidden error' do
-        expect{ subject }.to raise_error(ForbiddenError)
+        { password: 'fresh', password_confirmation: 'fresh' }
       end
     end
 
     context "with a blank params" do
       [{}, nil].each do |blank_params|
         subject { described_class.new(user, blank_params).call! }
+      end
 
-        it "raises not found error" do
-          expect{ subject }.to raise_error(ActiveRecord::RecordNotFound)
-        end
+      it 'leaves password unchanged' do
+        expect(subject.encrypted_password).to eq user.encrypted_password
       end
     end
 
@@ -44,7 +40,7 @@ module V1
 
     context "with invalid attributes" do
       let(:params)  do
-        { id: user.id, password_confirmation: 'not_matching', password: 'fresh'}
+        { password_confirmation: 'not_matching', password: 'fresh'}
       end
 
       it "raises validation exception" do

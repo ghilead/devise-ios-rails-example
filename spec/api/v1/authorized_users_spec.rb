@@ -5,7 +5,7 @@ module V1
     describe "Update User" do
       before { params.merge! authentication_token: user.authentication_token }
 
-      let(:url) { "v1/users/#{user.id}" }
+      let(:url) { "v1/users" }
       let(:user) { create(:user) }
       let(:params) { attributes_for(:user) }
 
@@ -35,13 +35,6 @@ module V1
         end
       end
 
-      context "with id not matching current user" do
-        let(:other_user) { create(:user) }
-        let(:url) { "v1/users/#{other_user.id}" }
-
-        it_behaves_like "a forbidden JSON request"
-      end
-
       context "with invalid params" do
         let(:params) { attributes_for(:user, email: 'not_valid_email') }
 
@@ -63,7 +56,7 @@ module V1
     describe "Delete Own Account" do
       before { params.merge! authentication_token: user.authentication_token }
 
-      let(:url) { "v1/users/#{user.id}" }
+      let(:url) { "v1/users" }
       let(:user) { create(:user) }
       let(:params) { {} }
 
@@ -87,19 +80,12 @@ module V1
           expect(subject.body).to eq UserSerializer.new(user).to_json
         end
       end
-
-      context "with id not matching current user" do
-        let(:other_user) { create(:user) }
-        let(:url) { "v1/users/#{other_user.id}" }
-
-        it_behaves_like "a forbidden JSON request"
-      end
     end
 
     describe "Change User password" do
       before { params.merge! authentication_token: user.authentication_token }
 
-      let(:url) { "v1/users/#{user.id}/password" }
+      let(:url) { "v1/users/password" }
       let(:user) { create(:user) }
       let(:params) do
         {
@@ -128,13 +114,6 @@ module V1
           expect{ json_for(subject)['user']['password'] }
             .to change{ user.reload.encrypted_password }
         end
-      end
-
-      context "with id not matching current user" do
-        let(:other_user) { create(:user) }
-        let(:url) { "v1/users/#{other_user.id}/password" }
-
-        it_behaves_like "a forbidden JSON request"
       end
 
       context "with invalid params" do

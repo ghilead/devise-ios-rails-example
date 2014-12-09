@@ -1,7 +1,7 @@
 module V1
   describe UpdateUserService do
     let(:user) { create(:user) }
-    let(:params) { attributes_for(:user, id: user.id, email: 'new@example.com') }
+    let(:params) { attributes_for(:user, email: 'new@example.com') }
 
     subject { described_class.new(user, params).call! }
 
@@ -17,8 +17,8 @@ module V1
       [{}, nil].each do |blank_params|
         subject { described_class.new(user, blank_params).call! }
 
-        it "raises not found error" do
-          expect{ subject }.to raise_error(ActiveRecord::RecordNotFound)
+        it "leaves user unchanged" do
+          expect(subject.email).to eq user.email
         end
       end
     end
@@ -30,7 +30,7 @@ module V1
     end
 
     context "with invalid attributes" do
-      let(:params)  { { id: user.id, email: 'not_valid_email' } }
+      let(:params)  { { email: 'not_valid_email' } }
 
       it "raises validation exception" do
         expect{ subject }.to raise_error(ActiveRecord::RecordInvalid)
