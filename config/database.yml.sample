@@ -13,14 +13,11 @@
 # gem 'pg'
 #
 development:
-  adapter:  postgresql
+  adapter:  sqlite
   host:     localhost
   encoding: unicode
   database: saaskit_development
-  pool:     5
   username: saaskit
-  password:
-  template: template0
 
   # Connect on a TCP socket. Omitted by default since the client uses a
   # domain socket that doesn't need configuration. Windows does not have

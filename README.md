@@ -82,13 +82,13 @@ change user password - `PUT    /users/password`
 
 - Secret Spaces for demonstration purposes
 
- index - `GET    /secret_spaces`
-  show - `GET    /secret_spaces/:id`
-   new - `GET    /secret_spaces/new`
-create - `POST   /secret_spaces`
-  edit - `GET    /secret_spaces/:id/edit`
-update - `PUT    /secret_spaces/:id`
-delete - `DELETE /secret_spaces/password/:id`
+     index - `GET    /secret_spaces`
+      show - `GET    /secret_spaces/:id`
+       new - `GET    /secret_spaces/new`
+    create - `POST   /secret_spaces`
+      edit - `GET    /secret_spaces/:id/edit`
+    update - `PUT    /secret_spaces/:id`
+    delete - `DELETE /secret_spaces/password/:id`
 
 Requirements
 ============
@@ -97,7 +97,6 @@ Requirements
 | :--: | :---: |
 | [Ruby][ruby] | 2.1.5 |
 | [Ruby on Rails][rails] | 4.2 |
-| [PostgreSQL][postgres] |  |
 
 You can find some guidelines on how to install above [on mac][mac_guidelines] and [on ubuntu][ubuntu_guidelines]
 
@@ -114,19 +113,15 @@ Setup
 Database config
 ---------------
 
-- install postgres on your machine - [installation guide][postgres_guidelines]
-- create your postgres user for development env `createuser -d -P saaskit`
-- create database for development env `createdb -O saaskit saaskit_development` and for test env `createdb -O saaskit saaskit_test`
 - copy config/database.yml.sample to config/database.yml `cp config/database.yml.sample to config/database.yml`
 - fill in your appropriate details in your database.yml config file, example:
 
 ```yaml
 development:
-  adapter: postgresql
+  adapter: sqlite3
   host: localhost
   database: saaskit_development
   username: saaskit
-  password: saaskit
 ```
 
 - and create a database:

@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 
 gem 'rails', '4.2.0.rc1'
-gem 'pg'
 
 gem 'devise', github: 'plataformatec/devise'
 gem 'simple_token_authentication'
@@ -40,6 +39,7 @@ group :development do
 end
 
 group :development, :test do
+  gem 'sqlite3'
   gem 'pry'
   gem 'pry-doc'
   gem 'pry-rescue'
@@ -55,6 +55,10 @@ end
 
 group :production do
   gem 'uglifier'
+end
+
+group :production, :staging do
+  gem 'pg'
 end
 
 group :test do
