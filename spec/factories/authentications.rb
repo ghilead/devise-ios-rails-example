@@ -6,10 +6,6 @@ class AuthenticationFactory
     @user_email = user_email
   end
 
-  def valid?
-    true
-  end
-
   def to_hash
     {
       userToken: user_token,
