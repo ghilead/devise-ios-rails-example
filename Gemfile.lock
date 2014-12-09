@@ -1,4 +1,12 @@
 GIT
+  remote: git://github.com/netguru/devise-ios-rails.git
+  revision: 39cd7bbd91c1c6c1e8e91df2c2edf9e22bd86b4b
+  specs:
+    devise-ios-rails (0.0.1)
+      devise
+      rails (~> 4.2.0.rc1)
+
+GIT
   remote: git://github.com/netguru/netguru.git
   revision: 0f5dae40514dbff148bafe690fb12e9074c2a76c
   specs:
@@ -441,6 +449,7 @@ DEPENDENCIES
   coffee-rails
   database_cleaner
   devise!
+  devise-ios-rails!
   dotenv-deployment
   dotenv-rails
   factory_girl_rails
