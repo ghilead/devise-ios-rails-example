@@ -3,7 +3,7 @@ module V1
     include Rack::Test::Methods
 
     describe "Update User" do
-      before { params.merge! authentication_token: user.authentication_token }
+      before { params.merge! build(:authentication, user: user) }
 
       let(:url) { "v1/users" }
       let(:user) { create(:user) }
@@ -26,12 +26,9 @@ module V1
         end
 
         it "serializes user with user serializer" do
-          json_response = json_for(subject)['user'].except('createdAt', 'updatedAt', 'id')
-          expected = JSON.parse(UserSerializer.new(
-            User.new(params)).to_json
-          )['user'].except('createdAt', 'updatedAt', 'id')
-
-          expect(json_response).to eq(expected)
+          json_response = json_for(subject)
+          expected_keys = UserSerializer.new(user).serializable_object.keys.map(&:to_s)
+          expect(json_response['user'].keys).to eq expected_keys
         end
       end
 
@@ -54,7 +51,7 @@ module V1
     end
 
     describe "Delete Own Account" do
-      before { params.merge! authentication_token: user.authentication_token }
+      before { params.merge! build(:authentication, user: user) }
 
       let(:url) { "v1/users" }
       let(:user) { create(:user) }
@@ -83,7 +80,7 @@ module V1
     end
 
     describe "Change User password" do
-      before { params.merge! authentication_token: user.authentication_token }
+      before { params.merge! build(:authentication, user: user) }
 
       let(:url) { "v1/users/password" }
       let(:user) { create(:user) }

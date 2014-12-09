@@ -1,15 +1,20 @@
 module V1
   module Helpers
     describe Authentication do
+      before { allow(helper).to receive(:headers).and_return({}) }
+      before { allow(helper).to receive(:params).and_return({}) }
+
       let(:helper) { double.extend(described_class) }
       let(:user) { create(:user) }
       let(:valid_token) { user.authentication_token }
+      let(:valid_email) { user.email }
 
       describe "#authorize!" do
         subject { helper.authorize! }
 
         context "has been authenticated properly" do
           before { allow(helper).to receive(:token).and_return(valid_token) }
+          before { allow(helper).to receive(:email).and_return(valid_email) }
           before { allow(helper).to receive(:current_user).and_return(user) }
 
           it "returns current user" do
@@ -27,6 +32,7 @@ module V1
 
         context "tried to authenticated but didn't matched a user" do
           before { allow(helper).to receive(:token).and_return('invalid_token') }
+          before { allow(helper).to receive(:email).and_return('invalid@example.com') }
           before { allow(helper).to receive(:current_user).and_return(nil) }
 
           it "fails with forbidden error" do
@@ -48,7 +54,7 @@ module V1
         subject { helper.authenticate }
         before do
           allow(helper)
-            .to receive(:params).and_return(authentication_token: valid_token)
+            .to receive(:params).and_return(build(:authentication, user: user).to_hash)
         end
 
         it "returns authenticated user" do
@@ -58,7 +64,7 @@ module V1
         context "with invalid token" do
         before do
           allow(helper)
-            .to receive(:params).and_return(authentication_token: 'invalid_token')
+            .to receive(:params).and_return(build(:invalid_authentication).to_hash)
         end
           it "returns nil" do
             expect(subject).to be_nil
@@ -72,7 +78,10 @@ module V1
         context "having authentication token in params" do
           before do
             allow(helper)
-              .to receive(:params).and_return(authentication_token: 'params_token')
+              .to(
+                receive(:params)
+                .and_return(userToken: 'params_token')
+              )
           end
 
           it "returns token from params" do
@@ -83,7 +92,8 @@ module V1
             before do
               allow(helper)
                 .to receive(:headers).and_return(
-                  'X-Authentication-Token' => 'header_token'
+                  'X-User-Token' => 'header_token',
+                  'X-User-Email' => 'valid@example.com'
                 )
             end
             it "returns token from params" do
@@ -98,7 +108,8 @@ module V1
               .to receive(:params).and_return(authentication_token: nil)
             allow(helper)
               .to receive(:headers).and_return(
-                'X-Authentication-Token' => 'header_token'
+                  'X-User-Token' => 'header_token',
+                  'X-User-Email' => 'valid@example.com'
               )
           end
 

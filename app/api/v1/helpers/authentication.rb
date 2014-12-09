@@ -6,15 +6,19 @@ module V1
       end
 
       def authenticate
-        User.find_by_authentication_token(token)
+        User.where(authentication_token: token, email: email).take
+      end
+
+      def email
+        params[:userEmail] || headers['X-User-Email']
       end
 
       def token
-        params[:authentication_token] || headers['X-Authentication-Token']
+        params[:userToken] || headers['X-User-Token']
       end
 
       def authorize!
-        raise(UnauthorizedError) if token.nil?
+        raise(UnauthorizedError) if token.nil? && email.nil?
         raise(ForbiddenError) if current_user.nil?
         current_user
       end
