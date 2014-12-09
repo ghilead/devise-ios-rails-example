@@ -72,23 +72,26 @@ Here is a complete list of paths:
 
 - Useful Devise paths
 
->                login - `POST   /users/sign_in`
->                login - `GET    /users/sign_in`
->             register - `POST   /users`
->          update user - `PUT    /users`
->          delete user - `DELETE /users`
-> change user password - `PUT    /users/password`
->       password reset - `POST   /users/password`
+```
+               login - POST   /users/sign_in
+               login - GET    /users/sign_in
+            register - POST   /users
+         update user - PUT    /users
+         delete user - DELETE /users
+change user password - PUT    /users/password
+      password reset - POST   /users/password
 
 - Secret Spaces for demonstration purposes
 
->   index - `GET    /secret_spaces`
->    show - `GET    /secret_spaces/:id`
->     new - `GET    /secret_spaces/new`
->  create - `POST   /secret_spaces`
->    edit - `GET    /secret_spaces/:id/edit`
->  update - `PUT    /secret_spaces/:id`
->  delete - `DELETE /secret_spaces/password/:id`
+```
+               index - GET    /secret_spaces
+                show - GET    /secret_spaces/:id
+                 new - GET    /secret_spaces/new
+              create - POST   /secret_spaces
+                edit - GET    /secret_spaces/:id/edit
+              update - PUT    /secret_spaces/:id
+              delete - DELETE /secret_spaces/password/:id
+```
 
 Requirements
 ============
