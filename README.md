@@ -124,7 +124,7 @@ Database config
 development:
   adapter: sqlite3
   host: localhost
-  database: saaskit_development
+  database: saaskit_development.sqlite3
   username: saaskit
 ```
 

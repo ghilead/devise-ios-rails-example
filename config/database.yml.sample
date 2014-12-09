@@ -16,7 +16,7 @@ development:
   adapter:  sqlite
   host:     localhost
   encoding: unicode
-  database: saaskit_development
+  database: saaskit_development.sqlite3
   username: saaskit
 
   # Connect on a TCP socket. Omitted by default since the client uses a
