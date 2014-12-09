@@ -8,6 +8,88 @@ Open Source Saaskit Rails Backend
 
 A rails backend for demonstrating how [Saaskit for iOS][ios_saaskit] works.
 
+How to use
+==========
+
+After a [successfull installation][#setup] you can use `localhost:3000/doc` to trigger request at some particular endpoints. You can also use some oldschool method with `curl`:
+
+register a user
+```bash
+$ curl \
+-H 'Accept: application/json' \
+-H 'Content-Type: application/json' \
+-X POST -d '{ "user": { "email": "user@example.com", "password": "1234" } }' \
+http://localhost:3000/users
+```
+
+in return you will get a newly created user
+
+```json
+{
+  "id": 2,
+  "email": "user@example.com",
+  "created_at": "2014-12-09T16:17:46.170Z",
+  "updated_at": "2014-12-09T16:17:46.170Z",
+  "authentication_token": "2-D9jBtnAPcP8fppzJAL"
+}
+```
+
+login a user
+```bash
+$ curl \
+-H 'Accept: application/json' \
+-H 'Content-Type: application/json' \
+-X POST -d '{ "user": { "email": "user@example.com", "password": "1234" } }' \
+http://localhost:3000/users/sign_in
+```
+
+you will get again the same data:
+
+```json
+{
+  "id": 2,
+  "email": "user@example.com",
+  "created_at": "2014-12-09T16:17:46.170Z",
+  "updated_at": "2014-12-09T16:17:46.170Z",
+  "authentication_token": "2-D9jBtnAPcP8fppzJAL"
+}
+```
+
+to make request to resources that are only available for registered users, you need to pass email and authentication token in your headers all the time:
+
+```bash
+$ curl \
+-H 'Accept: application/json' \
+-H 'Content-Type: application/json' \
+-H 'X-User-Email: user@example.com' \
+-H 'X-User-Token: 2-D9jBtnAPcP8fppzJAL' \
+-X GET http://localhost:3000/secret_spaces/new
+```
+
+response: `{ "id": null, "text": null, "created_at": null, "updated_at": null }`
+
+Here is a complete list of paths:
+
+- Useful Devise paths
+
+               login - `POST   /users/sign_in`
+               login - `GET    /users/sign_in`
+            register - `POST   /users`
+         update user - `PUT    /users`
+         delete user - `DELETE /users`
+change user password - `PUT    /users/password`
+      password reset - `POST   /users/password`
+
+- Secret Spaces for demonstration purposes
+
+ index - `GET    /secret_spaces`
+  show - `GET    /secret_spaces/:id`
+   new - `GET    /secret_spaces/new`
+create - `POST   /secret_spaces`
+  edit - `GET    /secret_spaces/:id/edit`
+update - `PUT    /secret_spaces/:id`
+delete - `DELETE /secret_spaces/password/:id`
+
 Requirements
 ============
 
