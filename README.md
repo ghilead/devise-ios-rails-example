@@ -82,7 +82,7 @@ $ curl \
 -H 'Accept: application/json' \
 -H 'Content-Type: application/json' \
 -X POST -d '{ "user": { "email": "user@example.com" } }'
-https://devise-ios-rails-example.herokuapp.com/secret_spaces/new
+https://devise-ios-rails-example.herokuapp.com/users/password
 ```
 
 you receive response status 204 (no content). In the meantime, server sends instructions on how to reset the password, which you should follow. On heroku we use `letter_opener_web` gem therefore those emails are stored at [https://devise-ios-rails-example.herokuapp.com/letter_opener](https://devise-ios-rails-example.herokuapp.com/letter_opener).
