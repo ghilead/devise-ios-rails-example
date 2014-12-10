@@ -37,9 +37,6 @@ group :development do
   gem 'guard-rspec'
   gem 'quiet_assets'
   gem 'gemsurance'
-end
-
-group :development, :heroku do
   gem 'letter_opener'
 end
 
@@ -56,6 +53,10 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'spring-commands-rspec'
   gem 'thin'
+end
+
+group :heroku do
+  gem 'letter_opener_web', '~> 1.2.0'
 end
 
 group :production, :heroku do
