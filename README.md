@@ -11,15 +11,21 @@ A rails backend for demonstrating how [Saaskit for iOS][ios_saaskit] works.
 How to use
 ==========
 
-After a [successfull installation][#setup] you can use `localhost:3000/doc` to trigger request at some particular endpoints. You can also use some oldschool method with `curl`:
+After a [successfull installation](#setup) you can use `localhost:3000/doc` to trigger request at some particular endpoints.
+
+Demo App
+========
+
+We've setup for you a demo of this server at [https://devise-ios-rails-example.herokuapp.com](https://devise-ios-rails-example.herokuapp.com). You can test how it works with either using dynamically generated swagger [docs][heroku_docs] or by using some old school curl commands:
 
 register a user
+
 ```bash
 $ curl \
 -H 'Accept: application/json' \
 -H 'Content-Type: application/json' \
 -X POST -d '{ "user": { "email": "user@example.com", "password": "1234" } }' \
-http://localhost:3000/users
+https://devise-ios-rails-example.herokuapp.com/users
 ```
 
 in return you will get a newly created user
@@ -35,12 +41,13 @@ in return you will get a newly created user
 ```
 
 login a user
+
 ```bash
 $ curl \
 -H 'Accept: application/json' \
 -H 'Content-Type: application/json' \
 -X POST -d '{ "user": { "email": "user@example.com", "password": "1234" } }' \
-http://localhost:3000/users/sign_in
+https://devise-ios-rails-example.herokuapp.com/users/sign_in
 ```
 
 you will get again the same data:
@@ -63,10 +70,22 @@ $ curl \
 -H 'Content-Type: application/json' \
 -H 'X-User-Email: user@example.com' \
 -H 'X-User-Token: 2-D9jBtnAPcP8fppzJAL' \
--X GET http://localhost:3000/secret_spaces/new
+-X GET https://devise-ios-rails-example.herokuapp.com/secret_spaces/new
 ```
 
 response: `{ "id": null, "text": null, "created_at": null, "updated_at": null }`
+
+in order to check how password reset works:
+
+```bash
+$ curl \
+-H 'Accept: application/json' \
+-H 'Content-Type: application/json' \
+-X POST -d '{ "user": { "email": "user@example.com" } }'
+https://devise-ios-rails-example.herokuapp.com/secret_spaces/new
+```
+
+you receive response status 204 (no content). In the meantime, server sends instructions on how to reset the password, which you should follow. On heroku we use `letter_opener_web` gem therefore those emails are stored at [https://devise-ios-rails-example.herokuapp.com/letter_opener](https://devise-ios-rails-example.herokuapp.com/letter_opener).
 
 Here is a complete list of paths:
 
@@ -189,6 +208,7 @@ Here a few guidelines to follow:
 
 Copyright  2014 © [Netguru][netguru_url], released under the New BSD License
 
+[heroku_docs]: https://devise-ios-rails-example.herokuapp.com/doc
 [ruby]: https://www.ruby-lang.org
 [rails]: http://www.rubyonrails.org
 [postgres]: http://www.postgresql.org
