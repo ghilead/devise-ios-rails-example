@@ -1,5 +1,4 @@
 source 'https://rubygems.org'
-ruby '2.1.5'
 
 gem 'rails', '4.2.0.rc1'
 
@@ -38,6 +37,9 @@ group :development do
   gem 'guard-rspec'
   gem 'quiet_assets'
   gem 'gemsurance'
+end
+
+group :development, :heroku do
   gem 'letter_opener'
 end
 
@@ -56,11 +58,11 @@ group :development, :test do
   gem 'thin'
 end
 
-group :production do
+group :production, :heroku do
   gem 'uglifier'
 end
 
-group :production, :staging do
+group :production, :staging, :heroku do
   gem 'pg'
 end
 
