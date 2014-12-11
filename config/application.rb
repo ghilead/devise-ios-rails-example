@@ -4,7 +4,7 @@ require 'rails/all'
 
 Bundler.require(*Rails.groups)
 
-module DeviseIosRails
+module DeviseIosRailsExample
   class Application < Rails::Application
 
     config.generators do |g|
