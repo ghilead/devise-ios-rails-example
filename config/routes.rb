@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
-  mount API => '/'
-
-  devise_for :users
-  resources :secret_spaces
+  scope :v1 do
+    devise_for :users
+    resources :secret_spaces
+  end
 
   mount GrapeSwaggerRails::Engine => '/doc'
 
