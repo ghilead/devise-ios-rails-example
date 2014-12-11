@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.0.rc1'
+gem 'rails', '4.1.8'
 
 gem 'devise', github: 'plataformatec/devise'
 gem 'simple_token_authentication'
