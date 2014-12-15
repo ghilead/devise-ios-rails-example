@@ -4,7 +4,7 @@ module V1
     before { current_session.header('Accept', 'application/json') }
 
     describe "Update User" do
-      before { params.merge! build(:authentication, user: user) }
+      before { build(:authentication, user: user).set_headers(current_session) }
 
       let(:url) { "v1/users" }
       let(:user) { create(:user) }
@@ -52,7 +52,7 @@ module V1
     end
 
     describe "Delete Own Account" do
-      before { params.merge! build(:authentication, user: user) }
+      before { build(:authentication, user: user).set_headers(current_session) }
 
       let(:url) { "v1/users" }
       let(:user) { create(:user) }
@@ -81,7 +81,7 @@ module V1
     end
 
     describe "Change User password" do
-      before { params.merge! build(:authentication, user: user) }
+      before { build(:authentication, user: user).set_headers(current_session) }
 
       let(:url) { "v1/users/password" }
       let(:user) { create(:user) }
