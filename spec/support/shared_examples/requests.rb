@@ -4,7 +4,7 @@ shared_examples "a good JSON request" do |response_code|
   end
 
   it "is a JSON response" do
-    expect(subject.content_type).to eq 'application/json'
+    expect(subject.content_type).to include 'application/json'
   end
 end
 
@@ -30,7 +30,7 @@ shared_examples "a bad JSON request" do |response_code|
   end
 
   it "is a JSON response" do
-    expect(subject.content_type).to eq 'application/json'
+    expect(subject.content_type).to include 'application/json'
   end
 
   it "returns an error object" do
