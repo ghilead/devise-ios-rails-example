@@ -9,4 +9,4 @@ use Rack::Cors do
   end
 end
 
-run Rack::Cascade.new [API, Rails.application]
+run Rack::Cascade.new [Rails.application]
