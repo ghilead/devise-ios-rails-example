@@ -18,7 +18,7 @@ module V1
             }
           end
 
-          it_behaves_like 'a good JSON request', 200
+          it_behaves_like "a successful JSON POST request"
         end
 
         context "with invalid params" do
@@ -28,7 +28,7 @@ module V1
             { user: { password: 'alcatraz' } },
           ]
           invalid_params.each do |invalid_param|
-            it_behaves_like "an unsuccessful JSON request" do
+            it_behaves_like "an unauthorized JSON request" do
               let(:params) { invalid_param }
             end
           end
