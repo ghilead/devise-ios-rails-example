@@ -1,3 +1,3 @@
 class SecretSpaceSerializer < ActiveModel::Serializer
-  attributes :id, :text
+  attributes :id
 end
