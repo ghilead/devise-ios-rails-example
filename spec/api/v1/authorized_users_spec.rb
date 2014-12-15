@@ -8,7 +8,7 @@ module V1
 
       let(:url) { "v1/users" }
       let(:user) { create(:user) }
-      let(:params) { { user: attributes_for(:user) } }
+      let(:params) { { user: attributes_for(:user, email: 'changed@example.com') } }
 
       subject { put url, params }
 
@@ -95,8 +95,6 @@ module V1
       end
 
       subject { put url, params }
-
-      it_behaves_like "needs authorization"
 
       context "with valid token" do
         it_behaves_like "a successful JSON PUT request"
