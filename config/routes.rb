@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   scope :v1 do
-    devise_for :users
+    devise_ios_rails_for :users
     resources :secret_spaces
   end
 
