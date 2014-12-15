@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  ActiveAdmin.routes(self)
   scope :v1 do
     devise_ios_rails_for :users
     resources :secret_spaces
