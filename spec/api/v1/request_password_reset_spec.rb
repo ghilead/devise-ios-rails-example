@@ -1,6 +1,7 @@
 module V1
   describe RequestPasswordReset do
     include Rack::Test::Methods
+    before { current_session.header('Accept', 'application/json') }
 
     describe "request a password reset" do
       let(:url) { 'v1/users/password' }

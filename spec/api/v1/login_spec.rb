@@ -1,6 +1,7 @@
 module V1
   describe Login do
     include Rack::Test::Methods
+    before { current_session.header('Accept', 'application/json') }
     %w(get post).each do |request_method|
       describe "login a user" do
         let(:url) { 'v1/users/sign_in' }

@@ -1,6 +1,7 @@
 module V1
   describe AuthorizedUsers do
     include Rack::Test::Methods
+    before { current_session.header('Accept', 'application/json') }
 
     describe "Update User" do
       before { params.merge! build(:authentication, user: user) }

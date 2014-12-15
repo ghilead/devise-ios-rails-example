@@ -1,6 +1,7 @@
 module V1
   describe UnauthorizedUsers do
     include Rack::Test::Methods
+    before { current_session.header('Accept', 'application/json') }
 
     describe "login a user" do
       let(:url) { 'v1/users' }
