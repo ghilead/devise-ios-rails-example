@@ -13,7 +13,6 @@ RSpec.configure do |config|
   end
 
   config.profile_examples = 2
-  config.order = :random
   Kernel.srand config.seed
   config.expect_with :rspec do |expectations|
     expectations.syntax = :expect
