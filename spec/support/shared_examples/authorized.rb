@@ -1,12 +1,18 @@
 shared_examples "needs authorization" do
   context "without authentication" do
-    before { params.merge! userToken: nil, userEmail: nil}
+    before do
+      current_session.header('X-User-Token', nil)
+      current_session.header('X-User-Email', nil)
+    end
 
     it_behaves_like "an unauthorized JSON request"
   end
 
   context "with invalid authentication" do
-    before { params.merge! build(:invalid_authentication) }
-    it_behaves_like "a forbidden JSON request"
+    before { build(:authentication, user: user).set_headers(current_session) }
+
+    let(:user) { build(:user) }
+
+    it_behaves_like "an unauthorized JSON request"
   end
 end
