@@ -22,7 +22,6 @@ gem 'sass-rails', '>= 5.0.0.beta1' # because of rails 4.2.0.betaX
 gem 'coffee-rails'
 gem 'devise-ios-rails', github: 'netguru/devise-ios-rails'
 gem 'rails_12factor'
-gem 'spring'
 
 group :development do
   gem 'better_errors'

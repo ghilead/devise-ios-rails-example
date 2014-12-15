@@ -478,7 +478,6 @@ DEPENDENCIES
   sass-rails (>= 5.0.0.beta1)
   shoulda-matchers
   simple_token_authentication
-  spring
   spring-commands-rspec
   sqlite3
   thin
