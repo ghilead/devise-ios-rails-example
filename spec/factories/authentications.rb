@@ -12,6 +12,11 @@ class AuthenticationFactory
       userEmail: user_email,
     }
   end
+
+  def set_headers(session)
+    session.header('X-User-Token', @user_token)
+    session.header('X-User-Email', @user_email)
+  end
 end
 
 FactoryGirl.define do
