@@ -3,11 +3,11 @@ module V1
     include Rack::Test::Methods
     before { current_session.header('Accept', 'application/json') }
 
-    describe "login a user" do
+    describe "register a user" do
       let(:url) { 'v1/users' }
       let(:user) { build(:user) }
 
-      subject { post url, params }
+      subject { post url, params, format: :json }
 
       context "with valid params" do
         let(:params) do
@@ -39,12 +39,12 @@ module V1
 
       context "with invalid params" do
         invalid_params = [
-          {},
+          { },
           { user: { email: 'ios_man@example.com' } },
           { user: { password: 'alcatraz' } },
         ]
         invalid_params.each do |invalid_param|
-          it_behaves_like "an unsuccessful JSON request" do
+          it_behaves_like "a bad JSON request", 422 do
             let(:params) { invalid_param }
           end
         end
