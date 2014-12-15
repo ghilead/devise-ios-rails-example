@@ -12,32 +12,28 @@ module V1
       context "with valid params" do
         let(:params) { { user: { email: user.email } } }
 
-
-        it "returns an OK (204) status code" do
-          expect(subject.status).to eq(204)
-        end
-
-        it "returns empty body" do
-          expect(subject.body).to be_empty
-        end
+        it_behaves_like "a successful JSON POST request"
 
         it "sends reset instructions to a user" do
           expect{ subject }.to change(ActionMailer::Base.deliveries, :count).by(1)
+        end
+
+        it "returns empty json body" do
+          expect(subject.body).to eq '{}'
         end
       end
 
       context "there is no such user" do
         let(:params) { { user: { email: 'non_existent' } } }
 
-        it "calls error method in the context" do
-          json = json_for(subject)
-          expect(json).to eq(
-            'error' => {
-              message: "Couldn't find User",
-              code: 0,
-              status: 404,
-            }.stringify_keys
-          )
+        it_behaves_like "a successful JSON POST request"
+
+        it "doesn't send any email" do
+          expect{ subject }.to change(ActionMailer::Base.deliveries, :count).by(0)
+        end
+
+        it "returns empty json body" do
+          expect(subject.body).to eq '{}'
         end
       end
     end
