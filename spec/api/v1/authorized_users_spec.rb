@@ -1,144 +1,140 @@
-module V1
-  describe AuthorizedUsers do
-    include Rack::Test::Methods
-    before { current_session.header('Accept', 'application/json') }
+describe 'authorized users endpoint' do
+  include Rack::Test::Methods
+  before { current_session.header('Accept', 'application/json') }
 
-    describe "Update User" do
-      before { build(:authentication, user: user).set_headers(current_session) }
+  describe "Update User" do
+    before { build(:authentication, user: user).set_headers(current_session) }
 
-      let(:url) { "v1/users" }
-      let(:user) { create(:user) }
-      let(:params) { { user: attributes_for(:user, email: 'changed@example.com') } }
+    let(:url) { "v1/users" }
+    let(:user) { create(:user) }
+    let(:params) { { user: attributes_for(:user, email: 'changed@example.com') } }
 
-      subject { put url, params }
+    subject { put url, params }
 
-      it_behaves_like "needs authorization"
+    it_behaves_like "needs authorization"
 
-      context "with valid token" do
-        it_behaves_like "a successful JSON PUT request"
+    context "with valid token" do
+      it_behaves_like "a successful JSON PUT request"
 
-        it "doesn't create a new record" do
-          expect{ subject }.not_to change(User, :count)
-        end
-
-        it "returns a user" do
-          json_response = json_for(subject)
-          expect(json_response).to have_key('user')
-        end
-
-        it "serializes user with user serializer" do
-          json_response = json_for(subject)
-          expected_keys = UserSerializer.new(user).serializable_object.keys.map(&:to_s)
-          expect(json_response['user'].keys).to eq expected_keys
-        end
+      it "doesn't create a new record" do
+        expect{ subject }.not_to change(User, :count)
       end
 
-      context "with invalid params" do
-        let(:params) { { user: attributes_for(:user, email: 'not_valid_email') } }
+      it "returns a user" do
+        json_response = json_for(subject)
+        expect(json_response).to have_key('user')
+      end
 
-        it_behaves_like "a bad JSON request", 422
-
-        it "returns error object" do
-          error = {
-            message: 'Validation failed: Email is invalid',
-            code: 0,
-            status: 422
-          }.stringify_keys
-          json_response = json_for(subject)
-
-          expect(json_response).to eq('error' => error)
-        end
+      it "serializes user with user serializer" do
+        json_response = json_for(subject)
+        expected_keys = UserSerializer.new(user).serializable_object.keys.map(&:to_s)
+        expect(json_response['user'].keys).to eq expected_keys
       end
     end
 
-    describe "Delete Own Account" do
-      before { build(:authentication, user: user).set_headers(current_session) }
+    context "with invalid params" do
+      let(:params) { { user: attributes_for(:user, email: 'not_valid_email') } }
 
-      let(:url) { "v1/users" }
-      let(:user) { create(:user) }
-      let(:params) { {} }
+      it_behaves_like "a bad JSON request", 422
 
-      subject { delete url, params }
+      it "returns error object" do
+        error = {
+          message: 'Validation failed: Email is invalid',
+          code: 0,
+          status: 422
+        }.stringify_keys
+        json_response = json_for(subject)
 
-      it_behaves_like "needs authorization"
+        expect(json_response).to eq('error' => error)
+      end
+    end
+  end
 
-      context "with valid token" do
-        it_behaves_like "a successful JSON DELETE request"
+  describe "Delete Own Account" do
+    before { build(:authentication, user: user).set_headers(current_session) }
 
-        it "removes a user" do
-          expect{ subject }.to change(User, :count).by(-1)
-        end
+    let(:url) { "v1/users" }
+    let(:user) { create(:user) }
+    let(:params) { {} }
 
-        it "returns a user" do
-          json_response = json_for(subject)
-          expect(json_response).to have_key('user')
-        end
+    subject { delete url, params }
 
-        it "serializes user with user serializer" do
-          expect(subject.body).to eq UserSerializer.new(user).to_json
-        end
+    it_behaves_like "needs authorization"
+
+    context "with valid token" do
+      it_behaves_like "a successful JSON DELETE request"
+
+      it "removes a user" do
+        expect{ subject }.to change(User, :count).by(-1)
+      end
+
+      it "returns a user" do
+        json_response = json_for(subject)
+        expect(json_response).to have_key('user')
+      end
+
+      it "serializes user with user serializer" do
+        expect(subject.body).to eq UserSerializer.new(user).to_json
+      end
+    end
+  end
+
+  describe "Change User password" do
+    before { build(:authentication, user: user).set_headers(current_session) }
+
+    let(:url) { "v1/users/password" }
+    let(:user) { create(:user) }
+    let(:params) do
+      {
+        user: {
+          password: 'new_pass',
+          passwordConfirmation: 'new_pass',
+        }
+      }
+    end
+
+    subject { put url, params }
+
+    context "with valid token" do
+      it_behaves_like "a successful JSON PUT request"
+
+      it "doesn't create a new record" do
+        expect{ subject }.not_to change(User, :count)
+      end
+
+      it "returns a user" do
+        json_response = json_for(subject)
+        expect(json_response).to have_key('user')
+      end
+
+      it "changes user password" do
+        expect{ json_for(subject)['user']['password'] }
+          .to change{ user.reload.encrypted_password }
       end
     end
 
-    describe "Change User password" do
-      before { build(:authentication, user: user).set_headers(current_session) }
-
-      let(:url) { "v1/users/password" }
-      let(:user) { create(:user) }
+    context "with invalid params" do
       let(:params) do
         {
           user: {
             password: 'new_pass',
-            passwordConfirmation: 'new_pass',
+            passwordConfirmation: 'not_match',
           }
         }
       end
 
-      subject { put url, params }
+      it_behaves_like "a bad JSON request", 422
 
-      context "with valid token" do
-        it_behaves_like "a successful JSON PUT request"
+      it "returns error object" do
+        error = {
+          message: "Validation failed: Password confirmation doesn't match Password",
+          code: 0,
+          status: 422
+        }.stringify_keys
+        json_response = json_for(subject)
 
-        it "doesn't create a new record" do
-          expect{ subject }.not_to change(User, :count)
-        end
-
-        it "returns a user" do
-          json_response = json_for(subject)
-          expect(json_response).to have_key('user')
-        end
-
-        it "changes user password" do
-          expect{ json_for(subject)['user']['password'] }
-            .to change{ user.reload.encrypted_password }
-        end
-      end
-
-      context "with invalid params" do
-        let(:params) do
-          {
-            user: {
-              password: 'new_pass',
-              passwordConfirmation: 'not_match',
-            }
-          }
-        end
-
-        it_behaves_like "a bad JSON request", 422
-
-        it "returns error object" do
-          error = {
-            message: "Validation failed: Password confirmation doesn't match Password",
-            code: 0,
-            status: 422
-          }.stringify_keys
-          json_response = json_for(subject)
-
-          expect(json_response).to eq('error' => error)
-        end
+        expect(json_response).to eq('error' => error)
       end
     end
-
-
   end
 end
