@@ -480,7 +480,7 @@ DEPENDENCIES
   activeadmin!
   better_errors
   binding_of_caller
-  capistrano (= 3.2.1)
+  capistrano (~> 3.2.1)
   capistrano-bundler
   capistrano-passenger
   capistrano-rails
