@@ -21,7 +21,6 @@ gem 'haml-rails'
 gem 'sass-rails', '>= 5.0.0.beta1' # because of rails 4.2.0.betaX
 gem 'coffee-rails'
 gem 'devise-ios-rails', github: 'netguru/devise-ios-rails'
-gem 'rails_12factor'
 gem 'activeadmin', github: 'activeadmin'
 gem 'capistrano', '~> 3.2.1'
 gem 'rvm1-capistrano3', require: false
@@ -57,6 +56,7 @@ end
 
 group :heroku do
   gem 'letter_opener_web', '~> 1.2.0'
+  gem 'rails_12factor'
 end
 
 group :production, :heroku do

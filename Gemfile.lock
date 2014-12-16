@@ -18,7 +18,7 @@ GIT
 
 GIT
   remote: git://github.com/netguru/devise-ios-rails.git
-  revision: 4a78ad04ffd5643398a4db0e7b14eafcbf77ec99
+  revision: a0f72d5496855e431b9c947e2db6733f5c4f7995
   specs:
     devise-ios-rails (0.0.12)
       active_model_serializers
@@ -50,7 +50,7 @@ GIT
 
 GIT
   remote: git://github.com/plataformatec/devise.git
-  revision: bf30ddddc0d210e96fde364a8614d2171c557344
+  revision: 2c8e242000921910077951ecce538a21e802c59d
   specs:
     devise (3.4.1)
       bcrypt (~> 3.0)
