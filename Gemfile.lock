@@ -533,4 +533,3 @@ DEPENDENCIES
   sqlite3
   thin
   uglifier
-  whenever
