@@ -6,17 +6,11 @@ gem 'devise', github: 'plataformatec/devise'
 gem 'simple_token_authentication'
 gem 'dotenv-deployment'
 gem 'dotenv-rails'
-gem 'grape'
-gem 'grape-swagger'
-gem 'grape-swagger-rails', github: 'pjurczynski/grape-swagger-rails'
-gem 'grape-active_model_serializers'
-gem 'active_model_serializers', '0.9.0' # because of grape swagger
+gem 'active_model_serializers', '0.9.0' # latest stable version
 gem 'netguru', github: 'netguru/netguru', require: false
 gem 'rollbar'
 gem 'rack-cors'
 gem 'nokogiri'
-gem 'omniauth'
-gem 'omniauth-google-oauth2'
 gem 'haml-rails'
 gem 'sass-rails', '>= 5.0.0.beta1' # because of rails 4.2.0.betaX
 gem 'coffee-rails'

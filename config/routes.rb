@@ -5,8 +5,6 @@ Rails.application.routes.draw do
     resources :secret_spaces
   end
 
-  mount GrapeSwaggerRails::Engine => '/doc'
-
   if defined?(LetterOpenerWeb)
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
   end
