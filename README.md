@@ -85,7 +85,8 @@ $ curl \
 https://devise-ios-rails-example.herokuapp.com/v1/users/password
 ```
 
-you receive response status 204 (no content). In the meantime, server sends instructions on how to reset the password, which you should follow. On heroku we use `letter_opener_web` gem therefore those emails are stored at [https://devise-ios-rails-example.herokuapp.com/letter_opener](https://devise-ios-rails-example.herokuapp.com/letter_opener).
+you receive response status 204 (no content). In the meantime, server sends instructions on how to reset the password, which you should follow.
+On heroku we use [letter_opener_web] gem therefore those emails are stored at [https://devise-ios-rails-example.herokuapp.com/letter_opener](https://devise-ios-rails-example.herokuapp.com/letter_opener). Therefore mails are NOT send to users.
 
 Here is a complete list of paths:
 
@@ -223,3 +224,4 @@ Copyright  2014 © [Netguru][netguru_url], released under the New BSD License
 [gemsurance]: https://github.com/appfolio/gemsurance
 [squash_commits]: http://blog.steveklabnik.com/posts/2012-11-08-how-to-squash-commits-in-a-github-pull-request
 [netguru_url]: https://netguru.co
+[letter_opener_web]: https://github.com/fgrehm/letter_opener_web
