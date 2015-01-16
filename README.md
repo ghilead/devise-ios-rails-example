@@ -203,7 +203,7 @@ Here's a few guidelines to follow:
 - keep gems up to date - you can use [gemsurance][gemsurance] to check for outdated gems - simply run `bundle exec gemsurance`.
 - write tests
 - make sure the entire test suite passes
-- make sure rubocop passes, our config
+- make sure rubocop passes our config
 - open a pull request on GitHub
 - [squash your commits][squash_commits] after receiving feedback
 
