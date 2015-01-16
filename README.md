@@ -11,7 +11,7 @@ A rails backend for demonstrating how [Devise for iOS][ios_devise] works.
 How to use
 ==========
 
-After a [successfull installation](#setup) you can use `localhost:3000/doc` to trigger request at some particular endpoints.
+After a [successfull installation](#setup) you can use `localhost:3000/doc` to trigger a request at some particular endpoints.
 
 Demo App
 ========
@@ -62,7 +62,7 @@ you will get again the same data:
 }
 ```
 
-to make request to resources that are only available for registered users, you need to pass email and authentication token in your headers all the time:
+to make a request to resources that are only available for registered users, you need to pass email and authentication token in your headers all the time:
 
 ```bash
 $ curl \
@@ -122,7 +122,7 @@ Requirements
 | [Ruby][ruby] | 2.1.5 |
 | [Ruby on Rails][rails] | 4.1.8 |
 
-You can find some guidelines on how to install above [on mac][mac_guidelines] and [on ubuntu][ubuntu_guidelines]
+You can find some guidelines on how to install above [on mac][mac_guidelines] and [on ubuntu][ubuntu_guidelines].
 
 #### Optional (recommended)
 
@@ -167,19 +167,19 @@ Environment config
 ------------------
 
 - copy .env.sample to .env `cp .env.sample .env`
-- fill your domain name and url - in local environment it's normally `localhost` and `http://localhost:3000` respectively.
+- fill in your domain name and url - in the local environment it's normally `localhost` and `http://localhost:3000` respectively.
 - you will need to generate your own `SECRET_KEY_BASE` by running `rake secret` and pasting the output into .env file.
-- you can omit Rollbar config in development environment.
+- you can omit Rollbar config in the development environment.
 
 Start Server
 ------------
 
-Before you start app be sure that PostgreSQL is already running. Then start Rails server on default port with `rails server`.
+Before you start the app be sure that PostgreSQL is already running. Then start a Rails server on default port with: `rails server`.
 
 Tests
 =====
 
-- you run tests with `spring rspec`
+- run tests with `spring rspec`
 
 Other tools
 ===========
@@ -189,14 +189,14 @@ Spring
 
 You can use [Spring][spring] to speed up specs, rake tasks and rails commands.
 
-Just add `spring` before commands like `rspec`, `rake`, `rails`
+Just add `spring` before commands like `rspec`, `rake`, `rails`.
 
 Contribution
 ============
 
 First, thank you for contributing!
 
-Here a few guidelines to follow:
+Here's a few guidelines to follow:
 
 - we follow [Ruby Style Guide][ruby_style_guides].
 - you can use [rubocop][rubocop] which can be easily integrated with popular editors. ([our rubocop config][rubocop_config])
