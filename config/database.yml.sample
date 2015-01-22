@@ -13,11 +13,10 @@
 # gem 'pg'
 #
 development:
-  adapter:  sqlite
+  adapter:  sqlite3
   host:     localhost
   encoding: unicode
   database: devise_ios_rails_development.sqlite3
-  username: saaskit
   username: devise_ios_rails
 
   # Connect on a TCP socket. Omitted by default since the client uses a
