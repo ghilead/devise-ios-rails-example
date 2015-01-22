@@ -134,10 +134,18 @@ Setup
 
 - clone repo to your local machine `git clone https://github.com/netguru/devise-ios-rails.git ./devise-ios-rails`
 
+Environment config
+------------------
+
+- copy .env.sample to .env `cp .env.sample .env`
+- fill in your domain name and url - in the local environment it's normally `localhost` and `http://localhost:3000` respectively.
+- you will need to generate your own `SECRET_KEY_BASE` by running `rake secret` and pasting the output into .env file.
+- you can omit Rollbar config in the development environment.
+
 Database config
 ---------------
 
-- copy config/database.yml.sample to config/database.yml `cp config/database.yml.sample to config/database.yml`
+- copy config/database.yml.sample to config/database.yml `cp config/database.yml.sample config/database.yml`
 - fill in your appropriate details in your database.yml config file, example:
 
 ```yaml
@@ -156,20 +164,14 @@ rake db:schema:load
 rake db:test:prepare
 ```
 
-- create seed data with `rake db:seed`
+- create seed data with:
+
+```bash
+rake db:seed
+```
 
 this will create:
-
-* users:
-    - registered user - ios@example.com / alcatraz
-
-Environment config
-------------------
-
-- copy .env.sample to .env `cp .env.sample .env`
-- fill in your domain name and url - in the local environment it's normally `localhost` and `http://localhost:3000` respectively.
-- you will need to generate your own `SECRET_KEY_BASE` by running `rake secret` and pasting the output into .env file.
-- you can omit Rollbar config in the development environment.
+* registered user: ios@example.com / alcatraz
 
 Start Server
 ------------
