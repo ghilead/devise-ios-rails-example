@@ -25,7 +25,7 @@ $ curl \
 -H 'Accept: application/json' \
 -H 'Content-Type: application/json' \
 -X POST -d '{ "user": { "email": "user@example.com", "password": "1234" } }' \
-https://devise-ios-rails-example.herokuapp.com/v1/users
+https://devise-ios-rails-example.herokuapp.com/users
 ```
 
 in return you will get a newly created user
@@ -47,7 +47,7 @@ $ curl \
 -H 'Accept: application/json' \
 -H 'Content-Type: application/json' \
 -X POST -d '{ "user": { "email": "user@example.com", "password": "1234" } }' \
-https://devise-ios-rails-example.herokuapp.com/v1/users/sign_in
+https://devise-ios-rails-example.herokuapp.com/users/sign_in
 ```
 
 you will get again the same data:
@@ -70,7 +70,7 @@ $ curl \
 -H 'Content-Type: application/json' \
 -H 'X-User-Email: user@example.com' \
 -H 'X-User-Token: 2-D9jBtnAPcP8fppzJAL' \
--X GET https://devise-ios-rails-example.herokuapp.com/v1/secret_spaces/new
+-X GET https://devise-ios-rails-example.herokuapp.com/secret_spaces/new
 ```
 
 response: `{ "id": null, "text": null, "created_at": null, "updated_at": null }`
@@ -82,7 +82,7 @@ $ curl \
 -H 'Accept: application/json' \
 -H 'Content-Type: application/json' \
 -X POST -d '{ "user": { "email": "user@example.com" } }' \
-https://devise-ios-rails-example.herokuapp.com/v1/users/password
+https://devise-ios-rails-example.herokuapp.com/users/password
 ```
 
 you receive response status 204 (no content). In the meantime, server sends instructions on how to reset the password, which you should follow.
@@ -93,25 +93,25 @@ Here is a complete list of paths:
 - Useful Devise paths
 
 ```
-               login - POST   /v1/users/sign_in
-               login - GET    /v1/users/sign_in
-            register - POST   /v1/users
-         update user - PUT    /v1/users
-         delete user - DELETE /v1/users
-change user password - PUT    /v1/users/password
-      password reset - POST   /v1/users/password
+               login - POST   /users/sign_in
+               login - GET    /users/sign_in
+            register - POST   /users
+         update user - PUT    /users
+         delete user - DELETE /users
+change user password - PUT    /users/password
+      password reset - POST   /users/password
 ```
 
 - Secret Spaces for demonstration purposes
 
 ```
-               index - GET    /v1/secret_spaces
-                show - GET    /v1/secret_spaces/:id
-                 new - GET    /v1/secret_spaces/new
-              create - POST   /v1/secret_spaces
-                edit - GET    /v1/secret_spaces/:id/edit
-              update - PUT    /v1/secret_spaces/:id
-              delete - DELETE /v1/secret_spaces/password/:id
+               index - GET    /secret_spaces
+                show - GET    /secret_spaces/:id
+                 new - GET    /secret_spaces/new
+              create - POST   /secret_spaces
+                edit - GET    /secret_spaces/:id/edit
+              update - PUT    /secret_spaces/:id
+              delete - DELETE /secret_spaces/password/:id
 ```
 
 Requirements
