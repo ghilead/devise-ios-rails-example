@@ -16,11 +16,6 @@ gem 'sass-rails', '>= 5.0.0.beta1' # because of rails 4.2.0.betaX
 gem 'coffee-rails'
 gem 'devise-ios-rails', github: 'netguru/devise-ios-rails'
 gem 'activeadmin', github: 'activeadmin'
-gem 'capistrano', '~> 3.2.1'
-gem 'rvm1-capistrano3', require: false
-gem 'capistrano-rails'
-gem 'capistrano-bundler'
-gem 'capistrano-passenger'
 
 group :development do
   gem 'better_errors'
