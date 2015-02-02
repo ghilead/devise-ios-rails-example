@@ -3,7 +3,7 @@ deployment:
     branch: master
     commands:
       - curl -L https://raw.githubusercontent.com/netguru/review/master/check.rb | ruby
-  production:
-    branch: production
-    commands:
-      - bundle exec cap production deploy
+      - heroku maintenance:on --app devise-ios-rails-example
+      - git push git@heroku.com:devise-ios-rails-example.git $CIRCLE_SHA1:master
+      - heroku run rake db:migrate --app devise-ios-rails-example
+      - heroku maintenance:off --app devise-ios-rails-example
