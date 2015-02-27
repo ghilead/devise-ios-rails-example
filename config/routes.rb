@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :secret_spaces
 
   devise_scope :user do
-    post 'auth/facebook', to: 'devise_ios_rails/oauth#facebook'
+    post 'users/auth/facebook', to: 'devise_ios_rails/oauth#facebook'
   end
 
   if defined?(LetterOpenerWeb)
