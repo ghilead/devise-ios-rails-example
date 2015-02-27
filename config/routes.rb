@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   devise_scope :user do
     post 'users/auth/facebook', to: 'devise_ios_rails/oauth#facebook'
+    post 'users/auth/google',   to: 'devise_ios_rails/oauth#google'
   end
 
   if defined?(LetterOpenerWeb)
