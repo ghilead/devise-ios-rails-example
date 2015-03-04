@@ -18,7 +18,7 @@ GIT
 
 GIT
   remote: git://github.com/netguru/devise-ios-rails.git
-  revision: d63de8e10df4c69a06c24ba64070eede702fd262
+  revision: 5713f8ee43d6f699b27809012054d8adeec563e0
   specs:
     devise-ios-rails (1.0.0)
       active_model_serializers (~> 0.9)
@@ -43,7 +43,7 @@ GIT
 
 GIT
   remote: git://github.com/plataformatec/devise.git
-  revision: 4bb457ff6d7429194ad53c6f21078cdec290b716
+  revision: ef28bf28140001745e6ec67ba0620864ef4b1350
   specs:
     devise (3.4.1)
       bcrypt (~> 3.0)
@@ -244,7 +244,7 @@ GEM
     mime-types (2.4.3)
     mini_portile (0.6.1)
     minitest (5.5.1)
-    multi_json (1.10.1)
+    multi_json (1.11.0)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
     net-scp (1.2.1)
