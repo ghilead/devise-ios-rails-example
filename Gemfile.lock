@@ -18,7 +18,7 @@ GIT
 
 GIT
   remote: git://github.com/netguru/devise-ios-rails.git
-  revision: 5713f8ee43d6f699b27809012054d8adeec563e0
+  revision: 5ffcfe3d24a372195876ba716c4b4756566683e1
   specs:
     devise-ios-rails (1.0.0)
       active_model_serializers (~> 0.9)
