@@ -132,7 +132,7 @@ You can find some guidelines on how to install above [on mac][mac_guidelines] an
 Setup
 =====
 
-- clone repo to your local machine `git clone https://github.com/netguru/devise-ios-rails.git ./devise-ios-rails`
+- clone repo to your local machine `git clone https://github.com/netguru/devise-ios-rails-example.git ./devise-ios-rails-example`
 
 Environment config
 ------------------
