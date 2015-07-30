@@ -1,7 +1,7 @@
 class AuthenticationFactory
   attr_reader :user_token, :user_email
 
-  def initialize(user_token:, user_email:)
+  def initialize(user_token, user_email)
     @user_token = user_token
     @user_email = user_email
   end
